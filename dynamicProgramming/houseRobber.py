@@ -27,3 +27,16 @@ print(rob([1, 2, 3, 1, 5, 3, 1, 2, 1]))
 print(rob([2, 1, 1, 2]))
 
 
+def improved(nums):
+    rob1, rob2 = 0, 0
+
+    for n in nums:
+        temp = max(n + rob1, rob2)
+        rob1 = rob2
+        rob2 = temp
+
+    return rob2
+
+
+print(improved([1, 2, 3, 1, 5, 3, 1, 2, 1]))
+print(improved([2, 1, 1, 2]))
