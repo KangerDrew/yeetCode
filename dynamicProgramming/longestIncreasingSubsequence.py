@@ -7,7 +7,7 @@ def lengthOfLIS(nums):
         else:
 
             i = 0
-            while num > sub[i]:
+            while i < len(sub) and num > sub[i]:
                 i += 1
 
             sub[i] = num
@@ -17,11 +17,8 @@ def lengthOfLIS(nums):
 
 print(lengthOfLIS([4, 2, 1, 4, 3, 7]))
 print(lengthOfLIS([8, 1, 6, 2, 3, 10]))
+print(lengthOfLIS([3, 2, 1]))
+print(lengthOfLIS([1, 2, 3]))
 
-val = 4
-some_list = [1, 2, 3]
-i = 5
-if val > some_list[i]:
-    i += 1
-    print(i)
+
 

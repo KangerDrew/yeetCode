@@ -25,3 +25,13 @@ def common(text1, text2):
 
 # See why we shouldn't use bad way to create matrix (debug @ if statement):
 print(common("bsbininm", "jmjkbkjkv"))
+
+
+# common_matrix = [[0] * (len(text1) + 1)]
+# common_matrix = [[0 for n in range(len(text1) + 1)] for m in range(len(text2) + 1)]
+
+something = "abc"
+safer = "abc"
+
+print(id(something))
+print(id(safer))
