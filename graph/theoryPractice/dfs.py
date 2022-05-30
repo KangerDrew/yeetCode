@@ -35,6 +35,7 @@ def DFSRecursive(graph, source):
 
 DFSRecursive(sample, "a")
 
+# DFS uses stack (Last In First Out) to traverse the graph
 
 # Note how DFSRecursive traversed b first instead of c,
 # this is because regular DFS uses stack, where it appended
