@@ -53,13 +53,15 @@ def cloneGraphBFS(node):
 
         # loop through the connecting nodes,
         for neighbor in n.neighbors:
-            # if a neighbor node of a
+            # if a neighbor node of n is not in the hash map, create and add it
+            # to the map, then append the original to the queue:
             if neighbor not in oldToNew:
 
                 oldToNew[neighbor] = Node(neighbor.val)
 
                 queue.append(neighbor)
 
+            # Append the copied neighbor to the neighbor list of the copied node:
             oldToNew[n].neighbors.append(oldToNew[neighbor])
 
     return oldToNew[node]
