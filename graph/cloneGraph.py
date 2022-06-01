@@ -22,9 +22,9 @@ def cloneGraphDFS(node):
 
         # Loop through each adjacent node (neighbor) of the original node,
         # and add them to the neighbors of the copy node:
-        node_copy.neighbors = [dfs(n) for n in node_input.neighbors]
+        node_copy.neighbors = [dfs(original_node) for original_node in node_input.neighbors]
 
-        # return the copied node:
+        # return the newly copied node:
         return node_copy
 
     return dfs(node) if node else None
@@ -36,7 +36,8 @@ def cloneGraphBFS(node):
     if not node:
         return node
 
-    # Same dictionary (hash map) as DFS:
+    # Same dictionary (hash map) as DFS, this hash map will take the
+    # original node as a key, and created copy node as a value:
     oldToNew = {}
 
     # Use python's deque, which is a specialized list with constant
@@ -46,12 +47,13 @@ def cloneGraphBFS(node):
     # Add the current node to the hash map:
     oldToNew[node] = Node(node.val)
 
+    # Begin BFS traversal:
     while queue:
 
         # Grab the first node currently in the queue:
         n = queue.popleft()
 
-        # loop through the connecting nodes,
+        # loop through the neighboring nodes of the popped node:
         for neighbor in n.neighbors:
             # if a neighbor node of n is not in the hash map, create and add it
             # to the map, then append the original to the queue:
@@ -61,9 +63,10 @@ def cloneGraphBFS(node):
 
                 queue.append(neighbor)
 
-            # Append the copied neighbor to the neighbor list of the copied node:
+            # Append the copied neighbor to the list of the copied node:
             oldToNew[n].neighbors.append(oldToNew[neighbor])
 
+    # Return the clone of the node from visited.
     return oldToNew[node]
 
 
