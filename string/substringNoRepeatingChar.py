@@ -27,3 +27,23 @@ def trashNoRepeatingChar(s):
 
 
 print(trashNoRepeatingChar("au"))
+
+
+# sliding window technique:
+def noRepeatingChar(s):
+
+    contained_char = set()
+    left = 0
+    max_len = 0
+
+    for right in range(len(s)):
+
+        while s[right] in contained_char:
+            contained_char.remove[left]
+            left += 1
+
+        contained_char.add(s[r])
+        max_len = max(max_len, right + 1 - left)
+
+    return max_len
+
