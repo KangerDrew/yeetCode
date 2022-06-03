@@ -39,10 +39,10 @@ def noRepeatingChar(s):
     for right in range(len(s)):
 
         while s[right] in contained_char:
-            contained_char.remove[left]
+            contained_char.remove(s[left])
             left += 1
 
-        contained_char.add(s[r])
+        contained_char.add(s[right])
         max_len = max(max_len, right + 1 - left)
 
     return max_len
