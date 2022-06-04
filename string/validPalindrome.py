@@ -34,8 +34,12 @@ def superShort(s):
     # then lowercase them:
     s = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
 
-    # s[::-1] returns a flipped s. If it's a valid palindrome, string should be same:
+    # s[::-1] returns a reversed s. If it's a valid palindrome, string should be same:
     return s == s[::-1]
 
 
 print(superShort("A man, a plan, a canal: Panama"))
+
+# practice slicing:
+some_string = "Nothing Else Matters"
+print(some_string[:5:-1])
