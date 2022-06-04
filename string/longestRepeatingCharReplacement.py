@@ -1,6 +1,6 @@
 def charReplacementFast(s, k):
 
-    # Hash map of the count of each letters in the string s:
+    # Dictionary (hash map) of the count of each letters in the string s:
     letters = {}
 
     # Index for left pointer:
@@ -16,10 +16,15 @@ def charReplacementFast(s, k):
     # that gets incremented every loop:
     for right in range(len(s)):
 
-        if s[right] not in letters:
-            letters[s[right]] = 1
-        else:
-            letters[s[right]] += 1
+        # if s[right] not in letters:
+        #     letters[s[right]] = 1
+        # else:
+        #     letters[s[right]] += 1
+
+        # Better than if else statement above. .get() method doesn't throw
+        # error if value doesn't exist in dictionary doesn't contain the
+        # value. The value defaults to 0 if it doesn't exist in the dictionary.
+        letters[s[right]] = 1 + letters.get(s[right], 0)
 
         # Most common letter count might change, if the newly added letter
         # makes that current letter the greatest recurring letter in the substring
