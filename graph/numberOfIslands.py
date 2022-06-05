@@ -64,9 +64,13 @@ def numIslands(grid):
                         (r_step, c_step) not in travelled):
                     # Append the un-travelled r_step, c_step to queue:
                     queue.append([r_step, c_step])
-                    # Mark down (r_step, c_step) as travelled:
+                    # IT IS ABSOLUTELY CRUCIAL TO ADD r_step, c_step TO travelled
+                    # IN THE IF STATEMENT. Otherwise, there's a chance we may add
+                    # already travelled r_step, c_step in the middle of for loop:
                     travelled.add((r_step, c_step))
+                    print("travelled row {0} and {1}".format(r_step, c_step))
 
+        # Don't need to return anything
         return None
 
     for r in range(rows):
@@ -125,12 +129,17 @@ sample3 = [
     ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
     ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 ]  # should return 1
-print(numIslands(sample3))
-
+# print(numIslands(sample3))
 
 sample4 = [
     ["1", "1", "1"],
     ["0", "1", "1"],
     ["1", "0", "1"]
 ]  # should return 2
+# print(numIslands(sample4))
 
+sample5 = [
+    ["1", "1", "1", "1", "1"],
+    ["1", "1", "1", "1", "1"]
+]  # should return 1
+print(numIslands(sample5))
