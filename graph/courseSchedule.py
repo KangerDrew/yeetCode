@@ -2,8 +2,7 @@
 # See Course Schedule II for Topological Sort Problem!
 
 def canFinish(numCourses, prerequisites):
-    # Create adjacency list (we're going to use dictionary instead
-    # so technically it's adjacency hash map), using numCourses value
+    # Create adjacency list using numCourses value
     # and prerequisites list:
     prereqMap = {i: [] for i in range(numCourses)}
     for crs, pre in prerequisites:
