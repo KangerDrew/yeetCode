@@ -1,7 +1,6 @@
-# This function uses DFS to count the number of components (same
-# as number of islands problem from theory practice). While this is
-# relatively efficient O(e + v), this isn't the most efficient way
-# to count components...
+# This function uses DFS to count the number of components (same as the
+# problem from theory practice). While this is relatively decent method
+# O(e + v), this isn't the most efficient way to count components...
 def countComponentsDFS(n, edges):
 
     # Build adjacency list:
