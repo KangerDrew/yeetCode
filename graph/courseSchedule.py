@@ -10,18 +10,18 @@ def canFinish(numCourses, prerequisites):
 
     # Now, create a set that we'll use to detect if we've already visited
     # that course (i.e. is there a cycle?)
-    visitedSet = set()
+    cycleCheck = set()
 
     def dfs(course):
         # Base case #1: Loop Detected
-        if course in visitedSet:
+        if course in cycleCheck:
             return False
         # Base case #2: Successfully traversed to the last node with no loop:
         if not prereqMap[course]:  # i.e. if prereqMap[course] is empty list
             return True
 
-        # If neither is true, add the current course to the visitedSet:
-        visitedSet.add(course)
+        # If neither is true, add the current course to the cycleCheck:
+        cycleCheck.add(course)
 
         # Now, recursively run dfs on all that course's prereqs:
         for prereq in prereqMap[course]:
@@ -30,8 +30,8 @@ def canFinish(numCourses, prerequisites):
                 return False
 
         # If dfs completed without returning false,
-        # remove course from visitedSet (clean up).
-        visitedSet.remove(course)
+        # remove course from cycleCheck (clean up).
+        cycleCheck.remove(course)
         # We also know that if dfs returned true for all prereqs,
         # it means that next time if dfs is run on the same course,
         # we'll use the base case #2 to exit out earlier. Setting
