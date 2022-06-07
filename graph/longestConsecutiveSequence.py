@@ -57,4 +57,38 @@ print(findSequenceUsingSort([100, 4, 200, 1, 3, 2]))
 print(findSequenceUsingSort([0, 3, 7, 2, 5, 8, 4, 6, 0, 1]))
 
 
+def longestSequence(nums):
 
+    # Convert the nums to sets for constant access.
+    # python should automatically get rid of repeating
+    # values (e.x. [1, 2, 1, 1, 3] ==>  {1, 2, 3}):
+    numSet = set(nums)
+
+    output_max = 0
+
+    # Loop through each value in numSet:
+    for n in numSet:
+        # if n - 1 is not in numSet, that means
+        # n is the beginning of a sequence:
+        if n - 1 not in numSet:
+
+            # Set a temporary max:
+            temp_max = 1
+
+            # Use while loop to check continuously if
+            # next value in the sequence exist, and increment
+            # temp_max value by 1 if so and continue:
+
+            while n + 1 in numSet:
+                temp_max += 1
+                n += 1
+
+            # compare temp_max to the old output_max value:
+            output_max = max(output_max, temp_max)
+
+    # Return the output_max
+    return output_max
+
+
+print(longestSequence([100, 4, 200, 1, 3, 2]))
+print(longestSequence([0, 3, 7, 2, 5, 8, 4, 6, 0, 1]))
