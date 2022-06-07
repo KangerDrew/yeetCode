@@ -79,6 +79,14 @@ def longestSequence(nums):
             # next value in the sequence exist, and increment
             # temp_max value by 1 if so and continue:
 
+            # The reason why below while loop doesn't make this
+            # O(n^2) solution is because that the while loop will
+            # only run when we are at the beginning of a sequence.
+            # Furthermore, while loop will at most run for the
+            # length of the nums array (less if there are repeating
+            # numbers) since all the while loop does is it iterates
+            # to the +1 value IF it exists.
+
             while n + 1 in numSet:
                 temp_max += 1
                 n += 1
