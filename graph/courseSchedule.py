@@ -16,7 +16,7 @@ def canFinish(numCourses, prerequisites):
         # Base case #1: Loop Detected
         if course in cycleCheck:
             return False
-        # Base case #2: Successfully traversed to the last node with no loop:
+        # Base case #2: Successfully traversed to the last node with no loop
         if not prereqMap[course]:  # i.e. if prereqMap[course] is empty list
             return True
 
