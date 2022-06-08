@@ -1,6 +1,7 @@
 # This function uses DFS to count the number of components (same as the
 # problem from theory practice). While this is relatively decent method
-# O(e + v), this isn't the most efficient way to count components...
+# O(n + e), this isn't the most efficient way to count components...
+# (n = # of nodes, e = # of edges)
 def countComponentsDFS(n, edges):
 
     # Build adjacency list:
@@ -38,5 +39,21 @@ def countComponentsDFS(n, edges):
         count += 1 if dfs(node) else 0
 
     return count
+
+
+# The below function uses Union Find to determine the number of connected
+# components, in a constant time O(n)!
+def countComponentsUnion(n, edges):
+
+    # We need "parents" array in order to keep track of which nodes
+    # are grouped together. Initially, each node will be their own
+    # parent. However as they are joined, a single node (parent) will
+    # be selected to "represent" the joined group.:
+    parents = [i for i in range(n)]
+
+    # "rank" array is used to determine which parent will become the newest
+    # parent when a union between two groups occur. When it does, the parent
+    # node with the larger rank will become the new parent:
+    rank = [1] * n
 
 
