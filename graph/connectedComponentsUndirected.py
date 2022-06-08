@@ -48,12 +48,12 @@ def countComponentsUnion(n, edges):
     # We need "parents" array in order to keep track of which nodes
     # are grouped together. Initially, each node will be their own
     # parent. However as they are joined, a single node (parent) will
-    # be selected to "represent" the joined group.:
+    # be selected to "represent" the joined component:
     parents = [i for i in range(n)]
 
     # "rank" array is used to determine which parent will become the newest
-    # parent when a union between two groups occur. When it does, the parent
-    # node with the larger rank will become the new parent:
+    # parent when a union between two components occur. When it does, the
+    # parent node with the larger rank will become the new parent:
     rank = [1] * n
 
     # find() function returns the "parent" of the given node:
@@ -68,15 +68,15 @@ def countComponentsUnion(n, edges):
         parents[node] = parents[parents[node]]
         return find(parents[node])
 
-    # union() function will combine two group into one, and
+    # union() function will combine two components into one, and
     # return 1 if union did occur. If no union can occur (i.e.
     # two nodes have the same parent), then we return 0:
     def union(node1, node2):
         # Get the parents of node1 and node 2:
         p1, p2 = find(node1), find(node2)
 
-        # If the nodes have the same parent, they already belong
-        # to the same group. Thus no union occurs, and we return 0:
+        # If the nodes have the same parent, they already belong to
+        # the same component. Thus no union occurs, and we return 0:
         if p1 == p2:
             return 0
 
@@ -92,5 +92,19 @@ def countComponentsUnion(n, edges):
             rank[p1] += rank[p2]
 
         # After union process is successful, we return 1, signifying that
-        # there are now 1 less group!
+        # there are now 1 less component!
         return 1
+
+    # Initially, there are n number of components since each nodes are their
+    # own independent component:
+    total_components = n
+
+    # We loop through the provided edge list, and perform union() on them.
+    # If union does occur (i.e. New component is created), union() returns 1
+    # and we decrement total_components count by 1 as such:
+    for n1, n2 in edges:
+        total_components -= union(n1, n2)
+
+    # Return total_components
+    return total_components
+
