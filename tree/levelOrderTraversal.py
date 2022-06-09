@@ -32,3 +32,35 @@ def levelOrderTrav(root):
             level_order.append(current_level)
 
     return level_order
+
+
+def levelOrderTravDFS(root):
+    if not root:
+        return []
+
+    # use python's deque:
+    stack = deque([[root, 1]])
+    # Keep track of the total level order:
+    level_order = []
+
+    while stack:
+
+        current_node, current_level = stack.pop()
+
+        # check if array doesn't exist for the level, and also
+        # check if the current_node is not null. If so, append
+        # new empty array:
+        if len(level_order) < current_level and current_node:
+            level_order.append([])
+
+        if current_node:
+            # Append the node's value to the current level:
+            level_order[current_level - 1].append(current_node.val)
+            # Append its children to the stack (right first then
+            # left to get the same result as BFS search):
+            stack.append([current_node.right, current_level + 1])
+            stack.append([current_node.left, current_level + 1])
+
+    return level_order
+
+
