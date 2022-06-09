@@ -20,7 +20,7 @@ def invertTreeRecur(root):
     return root
 
 
-def invertTreeItr(root):
+def invertTreeItrBFS(root):
     # Edge case: in case we get null node
     if not root:
         return None

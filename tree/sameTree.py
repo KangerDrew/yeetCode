@@ -17,7 +17,7 @@ def isSameTree(p, q):
 
 # We can use either DFS or BFS. It's just a matter of
 # simultaneously traversing both nodes at the same time:
-def isSameTreeItr(p, q):
+def isSameTreeItrDFS(p, q):
 
     stack = [[p, q]]
 
