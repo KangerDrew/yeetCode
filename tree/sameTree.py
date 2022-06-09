@@ -38,10 +38,9 @@ def isSameTreeItr(p, q):
         if current_p.val != current_q.val:
             return False
 
-        # Add left and right node (even if they're none) of p and q, together:
-        if current_p or current_q:
-            stack.append([current_p.left, current_q.left])
-            stack.append([current_p.right, current_q.right])
+        # Add left and right nodes (even if they're none) of p and q, together:
+        stack.append([current_p.left, current_q.left])
+        stack.append([current_p.right, current_q.right])
 
     # If while loop exited without returning False, it means all nodes matched,
     # so we can return True:
