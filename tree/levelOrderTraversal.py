@@ -1,5 +1,5 @@
 from collections import deque
-# Note: for level order traversal, we each leve can contain
+# Note: for level order traversal, each level can contain
 # more than 2 nodes (not very clear from examples)
 def levelOrderTrav(root):
     if not root:
