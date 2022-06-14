@@ -112,5 +112,3 @@ class Trie:
         # means that there are entry(ies) that does start with the provided
         # prefix. Thus, we simply return True:
         return True
-
-
