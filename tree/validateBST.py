@@ -35,12 +35,42 @@ def isValidBST(root):
 
     dfsInorder(root)
 
+    # My attempt at validating the elements are in order... ALSO INCORRECT:
     while inorder:
         prev, after = inorder.popleft(), inorder.popleft()
 
         if prev > after:
             return False
 
+    # return True if above loop doesn't return False:
     return True
 
 
+# Corrected solution, helper function now properly appends values
+# to the inorder deque:
+def isValidBSTCORRECTED(root):
+
+    # Create array
+    inorder = []
+
+    def dfsInorder(node):
+
+        # Only append when node is not null:
+        if node:
+            # Recursively enter left node:
+            dfsInorder(node.left)
+            # Then append current node:
+            inorder.append(node.val)
+            # Finally, recursively enter right node:
+            dfsInorder(node.right)
+
+    # Call helper function:
+    dfsInorder(root)
+
+    # Use for loop to check if elements are in order:
+    for i in range(1, len(inorder)):
+        if inorder[i] <= inorder[i - 1]:
+            return False
+
+    # return True if above loop doesn't return False:
+    return True
