@@ -74,3 +74,28 @@ def isValidBSTCORRECTED(root):
 
     # return True if above loop doesn't return False:
     return True
+
+
+def isValidBSTShorter(root):
+
+    # The helper function will return False if the boundaries do not
+    # meet the requirement for Binary Search Tree
+    def valid(node, left, right):
+        # Base Case: If we reach below the leaf node without
+        # returning false, it means we've met the requirement
+        # for BST for that recursion stack
+        if not node:
+            return True
+
+        # Below is a scenario where left child is larger than current node,
+        # and right child is less than the current node (invalid BST):
+        if not right > node.val > left:
+            return False
+
+        # Recursively check if the left and right nodes meet the BST requirement.
+        # The boundary for left - right node cannot be larger than current node
+        # The boundary for right - left node cannot be smaller than current node
+        return valid(node.left, left, node.val) and valid(node.right, node.val, right)
+
+    # Initialize the recursion, using -inf for left boundary and +inf for right boundary:
+    return valid(root, float('-inf'), float('inf'))
