@@ -22,7 +22,13 @@ class TrieNode:
         # Instantiating trie node should give us a attribute called
         # children, which is initialized as an empty dictionary.
 
-        # Unlike binary tree (where we have left and right children),
+        # It is important to remember that each individual TrieNode
+        # does NOT have an attribute called "value". Instead, we have
+        # children dictionary that "points to the direction of next letter
+        # if it exists within the trie". DO NOT CONFUSE THIS WITH THE WAY
+        # BINARY TREE WORKS!
+
+        # Also unlike binary tree (where we have left and right children),
         # we need to account for 26 (for english) possible children nodes,
         # and the easiest way to do that without creating 26 separate
         # attributes is to create a dictionary, where the key is the
@@ -41,40 +47,70 @@ class TrieNode:
 class Trie:
 
     def __init__(self):
+        # When trie is initialized, we start with a root, which should
+        # be a TrieNode with empty children dictionary. As we insert
+        # words, the root TrieNode's children dictionary will get more
+        # entries that point to different letters:
         self.root = TrieNode()
 
     def insert(self, word):
+        # We need to traverse down the Trie, and insert
+        # new TrieNodes as necessary. Start from the root:
         current = self.root
 
-        for character in word:
-            if character not in current.children:
-                current.children[character] = TrieNode()
+        # Loop through each letter in word input:
+        for letter in word:
+            # If the character doesn't exist in the current TrieNode's
+            # children, we instantiate a new TrieNode as a value using
+            # letter as the key:
+            if letter not in current.children:
+                current.children[letter] = TrieNode()
 
-            current = current.children[character]
+            # Step into the letter (traverse down the Trie), by updating
+            # the current pointer:
+            current = current.children[letter]
 
+        # Once we finish traversing down the Trie to the final letter's position,
+        # we set the endOfWord attribute for that TrieNode as True, indicating
+        # that a specific entry has finished on this TrieNode:
         current.endOfWord = True
 
     def search(self, word):
 
+        # Same as insert function, we traverse down Trie from root:
         current = self.root
 
-        for character in word:
-            if character not in current.children:
+        # Loop through each letter in word input:
+        for letter in word:
+
+            # For search function, if a letter is not present in the
+            # current TrieNode's children, it means no such entry exists,
+            # so return False:
+            if letter not in current.children:
                 return False
 
-            current = current.children[character]
+            # Otherwise, we continue to traverse down the Trie:
+            current = current.children[letter]
 
+        # If the final TrieNode was marked as end of word, that means the
+        # word input does exist in Trie. If not, it means that specific word
+        # was never inserted. Here we simply return current.endOfWord:
         return current.endOfWord
 
     def startsWith(self, prefix):
+        # This function is pretty much identical to search() function,
+        # except for the final return statement
         current = self.root
 
-        for character in prefix:
-            if character not in current.children:
+        for letter in prefix:
+            if letter not in current.children:
                 return False
 
-            current = current.children[character]
+            current = current.children[letter]
 
+        # If we successfully traversed down the Trie up till this point, it
+        # means that there are entry(ies) that does start with the provided
+        # prefix. Thus, we simply return True:
         return True
 
 
