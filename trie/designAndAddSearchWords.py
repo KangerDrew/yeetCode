@@ -32,7 +32,7 @@ class WordDictionary:
     def search(self, word):
 
         # The dfs function below takes TrieNode, and the
-        #
+        # starting_word_index
         def dfs_search_recursive(node, starting_word_index):
 
             # Take the input node as current:
@@ -69,3 +69,41 @@ class WordDictionary:
         # Execute the search from root using helper function:
         return dfs_search_recursive(self.root, 0)
 
+
+    def search_itr(self, word):
+
+        stack = [(self.root, 0)]
+
+        while stack:
+
+            current, index = stack.pop()
+            letter = word[index]
+
+            if letter == ".":
+
+                for entry in current.children:
+                    if index < len(word):
+                        stack.append((current.children[entry], index + 1))
+
+            else:
+
+                if letter not in current.children:
+                    continue
+
+                if index == len(word) - 1 and current.endOfWord:
+                    return True
+
+                if index < len(word):
+                    stack.append((current.children[letter], index + 1))
+
+        return False
+
+
+newTrie = WordDictionary()
+newTrie.addWord("bad")
+newTrie.addWord("dad")
+newTrie.addWord("mad")
+print(newTrie.search_itr("pad"))
+print(newTrie.search_itr("bad"))
+print(newTrie.search(".ad"))
+print(newTrie.search("b.."))
