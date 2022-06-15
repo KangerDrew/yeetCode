@@ -1,3 +1,4 @@
+from collections import deque
 # Basically same question as implement Trie, except
 # with additional feature of being able to add wild
 # card when searching for a word:
@@ -72,11 +73,18 @@ class WordDictionary:
 
     def search_itr(self, word):
 
-        stack = [(self.root, 0)]
+        stack = deque([(self.root, 0)])
 
         while stack:
 
             current, index = stack.pop()
+
+            if index == len(word):
+                if current.endOfWord:
+                    return True
+                else:
+                    continue
+
             letter = word[index]
 
             if letter == ".":
@@ -89,9 +97,6 @@ class WordDictionary:
 
                 if letter not in current.children:
                     continue
-
-                if index == len(word) - 1 and current.endOfWord:
-                    return True
 
                 if index < len(word):
                     stack.append((current.children[letter], index + 1))
