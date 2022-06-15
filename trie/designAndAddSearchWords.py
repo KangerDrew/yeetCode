@@ -2,7 +2,7 @@
 # with additional feature of being able to add wild
 # card when searching for a word:
 
-class WordNode:
+class TrieNode:
     def __init__(self):
         self.children = {}
         self.endOfWord = False
@@ -10,7 +10,7 @@ class WordNode:
 
 class WordDictionary:
     def __init__(self):
-        self.root = WordNode()
+        self.root = TrieNode()
 
     # addWord() is identical to insert() from Trie class:
     def addWord(self, word):
@@ -20,7 +20,7 @@ class WordDictionary:
         for letter in word:
 
             if letter not in current.children:
-                current.children[letter] = WordNode()
+                current.children[letter] = TrieNode()
 
             current = current.children[letter]
 
@@ -30,5 +30,28 @@ class WordDictionary:
     # except now we need to implement the ability to use dot
     # to match any letter:
     def search(self, word):
-        current = self.root
+
+        def dfs_search(node, word_index):
+
+            current = node
+
+            for i in range(word_index, len(word)):
+                letter = word[i]
+
+                if letter == ".":
+                    for entry in current.children:
+
+                        if dfs_search(current.children[entry], i + 1):
+                            return True
+
+                    return False
+                else:
+                    if letter not in current.children:
+                        return False
+                    current = current.children[letter]
+
+            return current.endOfWord
+
+        # Execute the dfs_search from root:
+        return dfs_search(self.root, 0)
 
