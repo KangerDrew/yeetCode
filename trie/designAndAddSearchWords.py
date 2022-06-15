@@ -70,37 +70,68 @@ class WordDictionary:
         # Execute the search from root using helper function:
         return dfs_search_recursive(self.root, 0)
 
-
+    # Iterative version of search function:
     def search_itr(self, word):
 
+        # Initialize stack structure using deque (noticeably faster
+        # than using regular python list). We add a tuple that consists
+        # of following - root TrieNode, and the index value (starting at
+        # 0 from the root):
         stack = deque([(self.root, 0)])
 
         while stack:
 
+            # Pop from stack:
             current, index = stack.pop()
 
+            # This if statement will check if we've reached the end
+            # of the word. If the index is equal to the length of the
+            # word, it means we've successfully traversed down the trie
+            # and just need to check current.endOfWord:
             if index == len(word):
                 if current.endOfWord:
                     return True
                 else:
+                    # This continue statement is necessary, as this will
+                    # skip the current loop and prevent code below from
+                    # crashing due to IndexError.
                     continue
 
+            # Get the letter we're checking from the input:
             letter = word[index]
 
+            # Check if we're provided a wild card option - "."
             if letter == ".":
 
+                # We need to loop through options available in current.children:
                 for entry in current.children:
+                    # Although the if statement below is unnecessary (first if statement
+                    # should catch edge cases), this is just to ensure we do not over-index:
                     if index < len(word):
+                        # Append the TrieNode to stack, along with the incremented index value:
                         stack.append((current.children[entry], index + 1))
 
+            # For any other string, we only need to check if the letter is
+            # part of the children:
             else:
 
+                # If letter is not part of the entry (not in children),
+                # it means that the word doesn't exist in this particular
+                # Trie path. However, the word could exist elsewhere so we
+                # do not return False, but instead use continue statement
+                # to skip the rest of the loop and move onto the next node
+                # in the stack:
                 if letter not in current.children:
                     continue
 
+                # Again, unnecessary if statement but we'll add it in so we
+                # do not over-index:
                 if index < len(word):
+                    # Append TrieNode, and the incremented index value:
                     stack.append((current.children[letter], index + 1))
 
+        # If we exit the while loop without returning True, it
+        # means the word was not found:
         return False
 
 
@@ -108,7 +139,7 @@ newTrie = WordDictionary()
 newTrie.addWord("bad")
 newTrie.addWord("dad")
 newTrie.addWord("mad")
-print(newTrie.search_itr("pad"))
-print(newTrie.search_itr("bad"))
-print(newTrie.search(".ad"))
-print(newTrie.search("b.."))
+print(newTrie.search_itr("pad"))  # Should be False
+print(newTrie.search_itr("bad"))  # Should be True
+print(newTrie.search(".ad"))  # Should be True
+print(newTrie.search("b..fa"))  # Should be True
