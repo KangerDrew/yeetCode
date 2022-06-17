@@ -35,7 +35,7 @@ def maxSubArrDivideAndConquer(nums):
     if len(nums) == 1:
         return nums[0]
 
-    mid_index = round(len(nums) / 2)
+    mid_index = len(nums) // 2
     left_sum = maxSubArrDivideAndConquer(nums[:mid_index])
     right_sum = maxSubArrDivideAndConquer(nums[mid_index:])
     mid_sum = middleOutMax(nums, mid_index - 1)
@@ -43,16 +43,24 @@ def maxSubArrDivideAndConquer(nums):
     return max(left_sum, right_sum, mid_sum)
 
 
-# print(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
-print(list(range(4, -1, -1)))
-# test_list = [-2,1,-3,4,-1,2,1,-5,4]
-test_list = [2, 0, 3, -2]
-test_list_mid = round(len(test_list)/2)
-print(test_list_mid)
-print(test_list[:test_list_mid])
-print(test_list[test_list_mid:])
-# print(test_list[test_list_mid:])
+# # print(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+# print(list(range(4, -1, -1)))
+# # test_list = [-2,1,-3,4,-1,2,1,-5,4]
+# test_list = [2, 0, 3, -2]
+# test_list_mid = round(len(test_list)/2)
+# print(test_list_mid)
 # print(test_list[:test_list_mid])
-print(maxSubArrDivideAndConquer(test_list))
+# print(test_list[test_list_mid:])
+# # print(test_list[test_list_mid:])
+# # print(test_list[:test_list_mid])
+# print(maxSubArrDivideAndConquer(test_list))
 
 
+# WEIRD EDGE CASE FOUND: For an array length == 3, if we have a negative
+# value on either the left corner or the right corner, with remaining two
+# having values, we'll get different result depending on where we take our
+# midpoint value (HOWEVER inputting mid_index -1 on helper function seems
+# to fix the issue...)
+print(maxSubArrDivideAndConquer([-1, 2, 1]))
+print(maxSubArrDivideAndConquer([1, 2, -1]))
+print(maxSubArrDivideAndConquer([-1, -1, 1, 2, 1]))
