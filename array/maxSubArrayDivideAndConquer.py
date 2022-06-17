@@ -1,3 +1,4 @@
+# Helper function for divide & conquer approach for this problem:
 def middleOutMax(nums, mid_index):
     current_sum = 0
     max_sum_left = float('-inf')
@@ -26,7 +27,8 @@ def middleOutMax(nums, mid_index):
     return max_sum_left + max_sum_right
 
 
-def maxSubArray(nums):
+#
+def maxSubArrDivideAndConquer(nums):
 
     if len(nums) == 0:
         return 0
@@ -34,8 +36,8 @@ def maxSubArray(nums):
         return nums[0]
 
     mid_index = round(len(nums) / 2)
-    left_sum = maxSubArray(nums[:mid_index])
-    right_sum = maxSubArray(nums[mid_index:])
+    left_sum = maxSubArrDivideAndConquer(nums[:mid_index])
+    right_sum = maxSubArrDivideAndConquer(nums[mid_index:])
     mid_sum = middleOutMax(nums, mid_index - 1)
 
     return max(left_sum, right_sum, mid_sum)
@@ -51,6 +53,6 @@ print(test_list[:test_list_mid])
 print(test_list[test_list_mid:])
 # print(test_list[test_list_mid:])
 # print(test_list[:test_list_mid])
-print(maxSubArray(test_list))
+print(maxSubArrDivideAndConquer(test_list))
 
 
