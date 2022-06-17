@@ -4,7 +4,6 @@ def middleOutMax(nums, mid_index):
     max_sum_left = float('-inf')
 
     for i in range(mid_index, -1, -1):
-        print('here')
         current_sum += nums[i]
         if current_sum > max_sum_left:
             max_sum_left = current_sum
@@ -16,7 +15,6 @@ def middleOutMax(nums, mid_index):
     max_sum_right = float('-inf')
 
     for j in range(mid_index + 1, len(nums)):
-        print('here right')
         current_sum += nums[j]
         if current_sum > max_sum_right:
             max_sum_right = current_sum
@@ -38,6 +36,9 @@ def maxSubArrDivideAndConquer(nums):
     mid_index = len(nums) // 2
     left_sum = maxSubArrDivideAndConquer(nums[:mid_index])
     right_sum = maxSubArrDivideAndConquer(nums[mid_index:])
+    # Taking mid_index - 1 as a midpoint seems to address the
+    # issue with len = 3 arrays (specifically [1, 2, -1]) that
+    # makes this algorithm calculate incorrect sum...
     mid_sum = middleOutMax(nums, mid_index - 1)
 
     return max(left_sum, right_sum, mid_sum)
