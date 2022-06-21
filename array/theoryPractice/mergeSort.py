@@ -20,11 +20,18 @@ def helper(l1, l2):
             combineSorted.append(l2.pop(0))
 
     if l1:
-        # combineSorted + l1
+        # Less memory efficient way
+        # += creates a whole new object reference, which
+        # is slightly more expensive memory-wise:
+        # combineSorted += l1
+
+        # More memory efficient way
+        # The extend uses the original object reference to
+        # modify the list:
         combineSorted.extend(l1)
     if l2:
+        # combineSorted += l2
         combineSorted.extend(l2)
-        # combineSorted + l2
 
     return combineSorted
 
