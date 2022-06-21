@@ -15,13 +15,9 @@ def helper(l1, l2):
 
     while l1 and l2:
         if l1[0] < l2[0]:
-            popped = l1.pop(0)
-            print(popped)
-            combineSorted.append(popped)
+            combineSorted.append(l1.pop(0))
         else:
-            popped = l2.pop(0)
-            print(popped)
-            combineSorted.append(popped)
+            combineSorted.append(l2.pop(0))
 
     if l1:
         # combineSorted + l1
@@ -41,10 +37,10 @@ def mergeSortCopied(arr):
 
     left, right = mergeSortCopied(arr[:midpoint]), mergeSortCopied(arr[midpoint:])
 
-    return merge(left, right)
+    return copiedHelper(left, right)
 
 
-def merge(left, right):
+def copiedHelper(left, right):
 
     result = []
     leftPointer = rightPointer = 0
