@@ -56,6 +56,12 @@ def numDecodingsItr(s):
     # we've successfully decoded the string once:
     dp = {len(s): 1}
 
+    # The iterative solution works backwards compared to the recursive solution.
+    # While we're still using the same memoization object (dp), we start from the
+    # last index of the string, and as we gradually work our way back to 0, we
+    # determine if from the current index, whether we can branch out into a second
+    # solution (i.e, the if statement where we check if we don't over-index, and
+    # if the two values are between 0 to 26):
     for i in range(len(s) - 1, -1, -1):
         if s[i] == "0":
             dp[i] = 0
@@ -66,6 +72,7 @@ def numDecodingsItr(s):
                                s[i] == "2" and s[i + 1] in "0123456"):
             dp[i] += dp[i + 2]
 
+    # Once we finish the for loop, return the value at dp[0]:
     return dp[0]
 
 
