@@ -1,7 +1,7 @@
 # This dynamic problem's worst case scenario is O(2^n), since on each
 # step, we can either take a single number, or two numbers (if it is
 # between 1 to 26).
-def numDecodings(s):
+def numDecodingsRecur(s):
 
     # Initialize a cache, where len(s) gives us the final_index + 1 value.
     # If we reach the very end of the string (final_index + 1), that means
@@ -27,10 +27,10 @@ def numDecodings(s):
 
         # Then, we check to see if we are able to take two values at once -
         # first check that the index will not overflow (i + 1 < len(s))
-        # Then, we check that first index is either 1 or two, and second
-        # index is between 0 and 6:
+        # Then, we check that first value is either 1 or 2. If the first
+        # value is 2, then the following value must be between 0 to 6:
         if i + 1 < len(s) and (s[i] == "1" or
-                               (s[i] == "2" and s[i + 1] in "0123456")):
+                               s[i] == "2" and s[i + 1] in "0123456"):
             # Recursively calculate this alternate solution onto res:
             res += helper(i + 2)
 
@@ -45,4 +45,28 @@ def numDecodings(s):
     return helper(0)
 
 
-print(numDecodings("1220"))
+print(numDecodingsRecur("1220"))
+
+
+# Below is the iterative solution for decode ways problem:
+def numDecodingsItr(s):
+
+    # Initialize a cache, where len(s) gives us the final_index + 1 value.
+    # If we reach the very end of the string (final_index + 1), that means
+    # we've successfully decoded the string once:
+    dp = {len(s): 1}
+
+    for i in range(len(s) - 1, -1, -1):
+        if s[i] == "0":
+            dp[i] = 0
+        else:
+            dp[i] = dp[i + 1]
+
+        if i + 1 < len(s) and (s[i] == "1" or
+                               s[i] == "2" and s[i + 1] in "0123456"):
+            dp[i] += dp[i + 2]
+
+    return dp[0]
+
+
+print(numDecodingsItr("1220"))
