@@ -17,14 +17,27 @@ def twoSumSlow(nums, target):
 # through the array once, which will give us O(n) solution:
 def twoSum(nums, target):
 
-    # Instantiate a dictionary,
+    # Instantiate a dictionary (hash map), where we'll store the
+    # num value as key, and its index (position) as the value.
+
+    # The reason why we're using the num value as key is because
+    # it is much faster to search if a key exists in hash maps,
+    # rather than its value:
     stored = {}
 
     for i in range(len(nums)):
+        # Get the current value using current index i:
         current = nums[i]
+        # Determine how much value is required for us to
+        # reach the target sum value:
         remainder = target - current
 
+        # Check if the remainder was already stored in the dictionary.
+        # As mentioned before, we configured the dictionary such that
+        # the num value is the key of the dictionary:
         if remainder in stored:
+            # If true, we return the index, and the remainder's key-value:
             return [i, stored[remainder]]
 
+        # Otherwise, store the current num value (as key) and index (as value):
         stored[nums[i]] = i
