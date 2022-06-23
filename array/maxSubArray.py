@@ -28,3 +28,38 @@ def maxSubArraySlow(nums):
             max_sum = max(current_subarr_sum, max_sum)
 
     return max_sum
+
+
+# The faster approach is to perform a linear scan of the array. As you
+# scan each element, we add onto the temporary current_sum value.
+
+# However, if the current_sum value dips below 0 (negative), we can say
+# that the sub-array formed before is no longer viable as it would contribute
+# negatively to the max_sum value. So instead, we re-set the sub-array to zero,
+# which effectively removes the previous elements from the sum and re-starting
+# the sub-array from that point.
+
+# RESTART         RESTART       NOT-RESTART          NOT-RESTART
+#   [-2,     1,     -3,     4,     -1,     2,     1,     -5,     4]
+
+# Note how we don't re-set the sub-array on every negative element, but only
+# if the negative element addition causes the current_sum value to dip below
+# negative:
+def maxSubArray(nums):
+
+    max_sum = float('-inf')
+    current_sum = 0
+
+    for n in nums:
+        # If current-sub-array sum dips below zero, reset the left boundary
+        # to the current element to negate the effect of previous elements:
+        if current_sum < 0:
+            current_sum = 0
+
+        # Add current element value to current_sum:
+        current_sum += n
+        # Compare against the max_sum:
+        max_sum = max(max_sum, current_sum)
+
+    return max_sum
+
