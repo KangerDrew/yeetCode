@@ -1,4 +1,6 @@
-# Helper function for divide & conquer approach for this problem:
+# Helper function for divide & conquer approach for this problem.
+# The helper function calculate the maximum possible sum value of
+# a provided array,
 def middleOutMax(nums, mid_index):
     current_sum = 0
     max_sum_left = float('-inf')
@@ -28,9 +30,7 @@ def middleOutMax(nums, mid_index):
 # Main function:
 def maxSubArrDivideAndConquer(nums):
 
-    if len(nums) == 0:
-        return 0
-    if len(nums) == 1:
+    if len(nums) <= 1:
         return nums[0]
 
     mid_index = len(nums) // 2
