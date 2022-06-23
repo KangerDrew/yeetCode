@@ -39,7 +39,7 @@ def maxSubArraySlow(nums):
 # which effectively removes the previous elements from the sum and re-starting
 # the sub-array from that point.
 
-# RESTART         RESTART       NOT-RESTART          NOT-RESTART
+#   RESET          RESET        NOT-RESET             NOT-RESET
 #   [-2,     1,     -3,     4,     -1,     2,     1,     -5,     4]
 
 # Note how we don't re-set the sub-array on every negative element, but only
