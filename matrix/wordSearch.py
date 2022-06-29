@@ -8,10 +8,7 @@ def wordSearch(board, word):
         if index == w_length:
             return True
 
-        if (row not in range(rows) or
-                column not in range(columns) or
-                (row, column) in travelled or
-                word[index] != board[row][column]):
+        if word[index] != board[row][column]:
             return False
 
         travelled.add((row, column))
@@ -20,10 +17,16 @@ def wordSearch(board, word):
                           (row, column - 1), (row, column + 1)]
 
         for r, c in possible_paths:
-            if dfsWord(r, c, index + 1):
+            if (r in range(rows) and
+                    c in range(columns) and
+                    (r, c) not in travelled
+                    and dfsWord(r, c, index + 1)):
                 return True
 
         travelled.remove((row, column))
+
+        if index + 1 == w_length:
+            return True
 
         return False
 
@@ -31,10 +34,8 @@ def wordSearch(board, word):
 
         for j in range(columns):
 
-            if board[i][j] == word[0]:
-
-                if dfsWord(i, j, 0):
-                    return True
+            if dfsWord(i, j, 0):
+                return True
 
     return False
 
@@ -46,6 +47,7 @@ def wordSearch(board, word):
 test_board_1 = [["A", "B", "C", "E"], ["S", "F", "E", "S"], ["A", "D", "E", "E"]]
 string_1 = "ABCESEEEFS"
 
-test_board_2 = [["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","B"],["A","A","A","A","B","A"]]
+test_board_2 = [["A", "A", "A", "A", "A", "A"], ["A", "A", "A", "A", "A", "A"], ["A", "A", "A", "A", "A", "A"],
+                ["A", "A", "A", "A", "A", "A"], ["A", "A", "A", "A", "A", "B"], ["A", "A", "A", "A", "B", "A"]]
 string_2 = "AAAAAAAAAAAAABB"
 print(wordSearch(test_board_2, string_2))
