@@ -70,9 +70,9 @@ def wordSearchWPruning(board, word):
         for m in range(columns):
             count[board[n][m]] += 1
 
-    for c in word:
-        if count[c]:
-            count[c] -= 1
+    for letter in word:
+        if count[letter]:
+            count[letter] -= 1
         else:
             return False
 
