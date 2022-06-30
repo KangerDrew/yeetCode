@@ -1,6 +1,6 @@
 def removeNthFromEnd(head, n):
 
-    # Use two pointers:
+    # Use two pointers (we can also just use 1, but I used 2 for clarity):
     # First pointer will be used to determine the length of the provided linked list
     # Second pointer will be used to reach the node prior to the removal node
     current1 = head
