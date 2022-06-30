@@ -26,8 +26,9 @@ def mergeTwoList(list1, list2):
         # Increment the pointer:
         current = current.next
 
-    # Check if there were any un-appended node from either list1 or list2:
-
+    # Check if there were any un-appended node from either list1 or list2,
+    # and append the remaining nodes after current pointer. Only one if
+    # statement should trigger, if at all.
     if list1:
         current.next = list1
 
