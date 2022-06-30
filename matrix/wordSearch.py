@@ -5,41 +5,65 @@ from collections import Counter
 def wordSearch(board, word):
     rows, columns = len(board), len(board[0])
     w_length = len(word)
+
+    # Keep track of traversed sections:
     travelled = set()
 
+    # Below is a recursive dfs function for traversing the
+    # provided board:
     def dfsWord(row, column, index):
+        # Base case: if we reached the end of the word, return True
         if index == w_length:
             return True
 
+        # If the letter at index doesn't match the letter at the current
+        # position on board, return False:
         if word[index] != board[row][column]:
             return False
 
+        # Add current position to the travelled set:
         travelled.add((row, column))
 
+        # Below are possible routes we can take from the current
+        # position - left, right, down, up:
         possible_paths = [(row - 1, column), (row + 1, column),
                           (row, column - 1), (row, column + 1)]
 
+        # Use for loop to iterate through 4 directions:
         for r, c in possible_paths:
+
+            # Check the following:
+            # - Is the new position in range?
+            # - Is the new position already in travelled set?
+            # - Does recursive input return True?
             if (r in range(rows) and
                     c in range(columns) and
                     (r, c) not in travelled
                     and dfsWord(r, c, index + 1)):
                 return True
 
+        # Remove the position from travelled set to clear it out
         travelled.remove((row, column))
 
+        # Edge case: If we didn't traverse through for loop, but are
+        # already at the end of the word, return True (happens if the
+        # board only consists of 1 letter)
         if index + 1 == w_length:
             return True
 
+        # Otherwise return False:
         return False
 
+    # Loop through each letter in the board:
     for i in range(rows):
 
         for j in range(columns):
 
+            # Use dfsWord function to see if it returned True:
             if dfsWord(i, j, 0):
                 return True
 
+    # If for loop above was exited without returning True, return False:
     return False
 
 
