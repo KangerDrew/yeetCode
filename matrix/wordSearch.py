@@ -87,32 +87,49 @@ def wordSearchWPruning(board, word):
         if count[word[0]] > count[word[-1]]:
             word = word[::-1]
 
+    # We need to keep track of which section has been travelled
     travelled = set()
 
+    # Below is a recursive dfs function to traverse the matrix:
     def dfs(r, c, i):
+        # Base case: We've reached the end of the word
         if i == len(word):
             return True
 
+        # Check the following:
+        # - Are we out of bounds? If yes, return False
+        # - Does the letter at current index match the letter at the
+        # current position? If no, return False
+        # - Did we already travel to this position? If yes, return False
         if (r < 0 or c < 0 or
                 r >= rows or c >= columns or
                 word[i] != board[r][c] or
                 (r, c) in travelled):
             return False
 
+        # Add the current position to the travelled set, as a tuple
         travelled.add((r, c))
+
+        # Input 4 directions (up, down, left, right), and the next index
+        # to the dfs function, and see if any return True.
         res = (dfs(r + 1, c, i + 1) or
                dfs(r - 1, c, i + 1) or
                dfs(r, c + 1, i + 1) or
                dfs(r, c - 1, i + 1))
 
+        # Once we finish traversing, remove the position
+        # so we can use travelled set again in other iterations.
         travelled.remove((r, c))
+
         return res
 
+    # Loop through each position on board, and run dfs function on them:
     for row in range(rows):
         for column in range(columns):
             if dfs(row, column, 0):
                 return True
 
+    # If the above for loop didn't return True, return False:
     return False
 
 
