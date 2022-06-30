@@ -12,8 +12,7 @@ def mergeTwoList(list1, list2):
     # append new node:
     current = pre_head
 
-    # Use while loop to alternate between the list1 node and
-    # list2 node:
+    # Use while loop to check list1 and list2 while they're not null:
     while list1 and list2:
 
         # Check which node has a smaller value, and append the smaller one:
