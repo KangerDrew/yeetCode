@@ -17,10 +17,3 @@ def wordBreak(s, wordDict):
 
 print(wordBreak("leetcode", ["leet", "code"]))
 print(wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"]))
-
-# Checking what happens if you reference words out of bound
-some_word = "eh"
-print(some_word[69:420])
-print(some_word[0:5])
-print(some_word[8])
-
