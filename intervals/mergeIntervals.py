@@ -1,5 +1,3 @@
-
-
 def mergeIntervals(intervals):
     # Sort the fking intervals:
     intervals.sort(key=lambda i: i[0])
