@@ -17,3 +17,27 @@ def wordBreak(s, wordDict):
 
 print(wordBreak("leetcode", ["leet", "code"]))
 print(wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"]))
+
+
+def wordBreakRecur(s, wordBank, memo=None):
+    if memo is None:
+        memo = {}
+    if s == "":
+        return True
+    if s in memo:
+        return memo[s]
+
+    for word in wordBank:
+        if word == s[0:len(word)]:
+            # Get the remaining string
+            newS = s[len(word):]
+            if wordBreakRecur(newS, wordBank, memo):
+                memo[s] = True
+                return True
+
+    memo[s] = False
+    return False
+
+
+print(wordBreakRecur("leetcode", ["leet", "code"]))
+print(wordBreakRecur("catsandog", ["cats", "dog", "sand", "and", "cat"]))
