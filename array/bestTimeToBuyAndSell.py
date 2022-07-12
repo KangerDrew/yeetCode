@@ -25,3 +25,4 @@ def maxProfit(prices):
             max_profit = max(max_profit, price - lowest_val)
 
     return max_profit
+
