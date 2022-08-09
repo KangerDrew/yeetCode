@@ -1,8 +1,11 @@
-# For this bit manipulation problem, there are three
+# For this bit manipulation problem, we can break it down to 3 bit-shifting operators:
 
+# & Operator - Only true when both quantities are true (used for carrying over extra 1)
 
+# XOR Operator - True when only one of them is true, which is also when they're
+# not equal (used for simulating addition)
 
-
+# Leftshift Operator - Shifting
 
 def getSumPython(a, b):
 
