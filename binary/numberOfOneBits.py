@@ -29,3 +29,19 @@ def numOfOneBits(n):
         n = n >> 1
 
     return counter
+
+
+# Alternate solution involves using & bitwise operation. When we perform
+# bitwise & operation on input and input - 1, it returns a new bit value
+# where leftmost 1 value becomes zero (see solution for visual guide)
+def numOfOneBitsAnd(n):
+
+    counter = 0
+
+    while n != 0:
+
+        n = n & (n - 1)
+        counter += 1
+
+    return counter
+
