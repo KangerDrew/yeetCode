@@ -7,12 +7,40 @@
 # Solution 1: Bit Manipulation
 
 # When we perform XOR bit operation on two identical numbers, we get zero:
-# Ex:     1 0 0 0 1 0
+# Ex 1:   1 0 0 0 1 0
 #         1 0 0 0 1 0
 #       --------------
 #     ==> 0 0 0 0 0 0
 
-#
+# The same result is achieved when we have several pairs of identical numbers, even
+# if the orders are mixed up:
+# Ex 2:   1 0 0 0 1 0    (34)
+#         0 1 0 0 0 1    (17)
+#       --------------
+#     ==> 1 1 0 0 1 1    (51)
+#         0 1 0 0 0 1    (17)
+#       --------------
+#     ==> 1 0 0 0 1 0    (34) *Note how after we performed XOR on 17 again, we got back 34!*
+#         1 0 0 0 1 0    (34)
+#       --------------
+#     ==> 0 0 0 0 0 0
+
+# Thus, when we perform XOR bitwise operation on all the numbers in the input array, and all
+# the values expected in the range, whatever is leftover will be the number that didn't have
+# the corresponding pair from all the values in the range (i.e. missing number)!
 
 
-# Solution 2: Gauss Formula Sum - Actual Sum
+def missingNumberBitwise(n):
+    val = len(n)
+
+    for num in n:
+        val ^= num
+
+    for i in range(len(n)):
+        val ^= i
+
+    return val
+
+
+
+# Solution 2: Gauss Sum Formula - Actual Sum
