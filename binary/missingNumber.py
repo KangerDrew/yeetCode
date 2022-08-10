@@ -1,4 +1,5 @@
-# Besides the brute-force method, linear time solution can be achieved
+# Besides the brute-force method (involves sorting the input array and checking
+# which one is missing - O(n log n)), linear time solution can be achieved
 # by using hashset to store all the values from the input, looping through
 # the range to see which numbers are available. However, this also requires
 # constant space memory for the hashset. There are two solutions that can
@@ -30,17 +31,26 @@
 # the corresponding pair from all the values in the range (i.e. missing number)!
 
 
-def missingNumberBitwise(n):
-    val = len(n)
+def missingNumberBitwise(nums):
+    val = len(nums)
 
-    for num in n:
-        val ^= num
+    for n in nums:
+        val ^= n
 
-    for i in range(len(n)):
+    for i in range(len(nums)):
         val ^= i
 
     return val
 
+
+# Shorter way to write the above solution, using Python's enumerate function:
+def missingNumberBitwiseShorter(nums):
+    val = len(nums)
+
+    for i, num in enumerate(nums):
+        val ^= i ^ num
+
+    return val
 
 
 # Solution 2: Gauss Sum Formula - Actual Sum
