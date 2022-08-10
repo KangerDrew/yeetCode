@@ -53,4 +53,16 @@ def missingNumberBitwiseShorter(nums):
     return val
 
 
-# Solution 2: Gauss Sum Formula - Actual Sum
+# Solution 2: Gauss Summation Formula - Actual Sum
+# This solution is much simpler. Get the total sum of all the values in range
+# by using Gauss Summation, and subtracted from all the values from the input
+# list. Whatever is remaining should be the missing value!
+def missingNumberGauss(nums):
+
+    # Below is the gauss summation value formula:
+    missing = len(nums)*(len(nums) + 1)//2
+
+    for num in nums:
+        missing -= num
+
+    return missing
