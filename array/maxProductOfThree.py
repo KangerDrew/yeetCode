@@ -13,7 +13,7 @@ def maximumProduct(nums):
     for n in nums:
         if n <= min_1:
             min_2 = min_1
-            min_1 = n;
+            min_1 = n
         elif n <= min_2:
             min_2 = n
 
