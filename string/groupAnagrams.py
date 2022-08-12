@@ -1,7 +1,5 @@
 # My blind attempt at this problem:
-
-def groupAnagramsRAW(strs):
-
+def groupAnagramsBLIND(strs):
     result = []
 
     while len(strs) > 0:
@@ -9,6 +7,19 @@ def groupAnagramsRAW(strs):
         sub_result = []
         current_word = strs.pop(0)
         sub_result.append(current_word)
+
+        if len(current_word) == 0:
+
+            ind = 0
+            while len(strs) > ind:
+
+                if len(strs[ind]) == 0:
+                    sub_result.append(strs.pop(ind))
+                else:
+                    ind += 1
+
+            result.append(sub_result)
+            continue
 
         current_letters = {}
 
@@ -41,7 +52,7 @@ def groupAnagramsRAW(strs):
 
     return result
 
-#
+
 # test_string = "tester"
 # for i, letter in enumerate(test_string):
 #     if letter == "b":
@@ -51,4 +62,7 @@ def groupAnagramsRAW(strs):
 #     print("broken early")
 
 
-print(groupAnagramsRAW(["eat","tea","tan","ate","nat","bat"]))
+# print(groupAnagramsBLIND(["eat", "tea", "tan", "ate", "nat", "bat"]))
+# print(groupAnagramsBLIND(["", "b"]))
+print(groupAnagramsBLIND(["", "", ""]))
+print(groupAnagramsBLIND(["h","h","h"]))
