@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 # My blind attempt at this problem:
 def groupAnagramsBLIND(strs):
     result = []
@@ -65,4 +68,31 @@ def groupAnagramsBLIND(strs):
 # print(groupAnagramsBLIND(["eat", "tea", "tan", "ate", "nat", "bat"]))
 # print(groupAnagramsBLIND(["", "b"]))
 print(groupAnagramsBLIND(["", "", ""]))
-print(groupAnagramsBLIND(["h","h","h"]))
+print(groupAnagramsBLIND(["h", "h", "h"]))
+
+
+# The correct solution - convert each letter to a list of length 26, where
+# each index is a number of letters in the word. Then, convert those list to
+# tuples so they can be used as a key to a dictionary, where the default value
+# be a list that we can append our string to.
+
+def groupAnagrams(strs):
+
+    # Below is a dictionary, where keys will be a tuples that
+    # indicate how many letters were in
+    matched_strings = defaultdict(list)
+
+    for s in strs:
+        count = [0] * 26  # there are 26 letters in english
+
+        for c in s:
+            # use ord() function to get the unicode value of the letter
+            # subtracted by that of "a":
+            count[ord(c) - ord("a")] += 1
+
+        matched_strings[tuple(count)].append(s)
+
+    # Return the values (should be bunch of lists) of the matched_strings dictionary:
+    return matched_strings.values()
+
+
