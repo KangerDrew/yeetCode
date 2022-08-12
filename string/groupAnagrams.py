@@ -90,6 +90,11 @@ def groupAnagrams(strs):
             # subtracted by that of "a":
             count[ord(c) - ord("a")] += 1
 
+        # For example, if our letter was "abc", then the resulting list we get
+        # would be [1, 1, 1, 0, 0, 0, 0... ALL ZEROS..., 0, 0]
+
+        # We need to use the list as a key in our dictionary, but because list is mutable
+        # we can't do that. Instead, we must convert it to tuple for it to be used as a key:
         matched_strings[tuple(count)].append(s)
 
     # Return the values (should be bunch of lists) of the matched_strings dictionary:
