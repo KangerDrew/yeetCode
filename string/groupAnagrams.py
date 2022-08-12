@@ -1,11 +1,10 @@
 # My blind attempt at this problem:
 
-def groupAnagrams(strs):
+def groupAnagramsRAW(strs):
 
     result = []
-    list_length = len(strs)
 
-    while list_length > 0:
+    while len(strs) > 0:
 
         sub_result = []
         current_word = strs.pop(0)
@@ -20,18 +19,36 @@ def groupAnagrams(strs):
             else:
                 current_letters[letter] += 1
 
-        for word in strs:
+        for i, word in enumerate(strs):
             check = current_letters.copy()
 
-            for w in word:
+            for j, w in enumerate(word):
 
                 if w not in check:
+                    break
+                elif check[w] <= 0:
                     break
                 else:
                     check[w] -= 1
 
-            # Write more here on determining whether to append string or not
+            if j < len(word) - 1:
+                continue
+            else:
+                new_sub_word = strs.pop(i)
+                sub_result.append(new_sub_word)
 
         result.append(sub_result)
 
+    return result
 
+#
+# test_string = "tester"
+# for i, letter in enumerate(test_string):
+#     if letter == "b":
+#         break
+#
+# if i < len(test_string) - 1:
+#     print("broken early")
+
+
+print(groupAnagramsRAW(["eat","tea","tan","ate","nat","bat"]))
