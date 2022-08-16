@@ -114,16 +114,22 @@ class MinHeap:
     #     return data
 
     def heapifyDown(self, index):
+        # Tentatively name the current index we're on as "smallest"
         smallest = index
 
+        # Check the left value against the smallest (index) value
         if self.hasLeftChild(index) and self.storage[smallest] > self.leftChild(index):
             smallest = self.getLeftChildIndex(index)
+        # Check the right value against the smallest value (after checking left)
         if self.hasRightChild(index) and self.storage[smallest] > self.rightChild(index):
             smallest = self.getRightChildIndex(index)
 
+        # If smallest value was not changed by the above two if conditions, we don't need
+        # to recurse down. Otherwise, we swap the smallest element w current element, and
+        # continue to heapify down.
         if smallest != index:
             self.swap(index, smallest)
-            self.heapifyDown()
+            self.heapifyDown(smallest)
 
     def removeMin(self):
         if self.size == 0:
