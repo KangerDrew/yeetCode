@@ -75,3 +75,37 @@ class MinHeap:
         self.size += 1
         self.heapifyUp(self.size - 1)
 
+    def heapifyDown(self):
+        # start from the root
+        index = 0
+        # Use while loop, and at the beginning check that the left child.
+        # This is because the heap must be a complete tree, thus it must be
+        # filled from left from right!
+        while self.hasLeftChild(index):
+            # Temporarily smallerChildIndex variable, and set it as left child index
+            smallerChildIndex = self.getLeftChildIndex(index)
+            # Then, we check if there is a right child, and whether the value is greater
+            # or less than the right child:
+            if self.hasRightChild(index) and self.rightChild(index) < self.leftChild(index):
+                smallerChildIndex = self.getRightChildIndex(index)
+
+            # Now, check if the current node we're at is smaller than the two of its children.
+            # If true, we no longer need to heapify down, so break.
+            if self.storage[index] < self.storage[smallerChildIndex]:
+                break
+            # otherwise, we need to swap the smallest child and the parent and continue
+            else:
+                self.swap(index, smallerChildIndex)
+            # Update the index to smallerChildIndex
+            index = smallerChildIndex
+
+    def removeMin(self):
+        if self.size == 0:
+            raise "Empty Heap"
+
+        data = self.storage[0]
+        self.storage[0] = self.storage[self.size - 1]
+        self.size -= 1
+        self.heapifyDown()
+
+        return data
