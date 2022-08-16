@@ -14,3 +14,28 @@ class MinHeap:
     def getRightChildIndex(self, index):
         return 2 * index + 2
 
+    def hasParent(self, index):
+        # if getParentIndex returns a negative number, it means
+        # that the provided index cannot have a parent!
+        return self.getParentIndex(index) >= 0
+
+    def hasLeftChild(self, index):
+        # If the left child index is less than the size of the heap,
+        # then the current index should have a left child.
+        return self.getLeftChildIndex(index) < self.size
+
+    def hasRightChild(self, index):
+        # If the right child index is less than the size of the heap,
+        # then the current index should have a right child.
+        return self.getRightChildIndex(index) < self.size
+
+    def parent(self, index):
+        return self.storage[self.getParentIndex(index)]
+
+    def leftChild(self, index):
+        return self.storage[self.getLeftChildIndex(index)]
+
+    def rightChild(self, index):
+        return self.storage[self.getRightChildIndex(index)]
+
+
