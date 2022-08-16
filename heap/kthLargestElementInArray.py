@@ -6,6 +6,8 @@ import heapq
 # largest element. Time complexity would be O(n log n). But we
 # can do better, using max heap data structure.
 
+
+# SOLUTION #1 - Using Priority Queue (Min Heap):
 # When using heap, we create a min-heap of length k, which will cost
 # us O(k). Then, we add the remaining elements one by one, while
 # maintaining the length k for the min-heap by popping the smallest
