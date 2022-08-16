@@ -105,6 +105,8 @@ class MinHeap:
     #         raise "Empty Heap"
     #
     #     data = self.storage[0]
+    #     # Place the largest (last element) at the root. We will
+    #     # heapify this element down to make our heap valid again!
     #     self.storage[0] = self.storage[self.size - 1]
     #     self.size -= 1
     #     self.heapifyDown()
@@ -128,7 +130,10 @@ class MinHeap:
             raise "Empty Heap"
 
         data = self.storage[0]
+        # Place the largest (last element) at the root. We will
+        # heapify this element down to make our heap valid again!
         self.storage[0] = self.storage[self.size - 1]
         self.size -= 1
         self.heapifyDown(0)
+
         return data
