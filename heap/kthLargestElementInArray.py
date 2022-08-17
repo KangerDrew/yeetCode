@@ -61,8 +61,9 @@ print(findKthLargestHeap([3, 2, 1, 5, 6, 4], 2))
 
 def findKthLargestQuickSelect(nums, k):
 
-    # Get the left and right boundaries
-    left, right = 0, len(nums) - 1
+    # Convert k to the expected index position of the kth largest element
+    # in the sorted array
+    k = len(nums) - k
 
     def quickSelect(l, r):
 
@@ -96,7 +97,7 @@ def findKthLargestQuickSelect(nums, k):
         else:
             return nums[pointer]
 
-    return quickSelect(left, right)
+    return quickSelect(0, len(nums) - 1)
 
 
 print(findKthLargestQuickSelect([3, 2, 1, 5, 6, 4], 2))
