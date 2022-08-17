@@ -101,5 +101,4 @@ def findKthLargestQuickSelect(nums, k):
 
 
 print(findKthLargestQuickSelect([3, 2, 1, 5, 6, 4], 2))
-
-
+print(random.randint(1, 4))
