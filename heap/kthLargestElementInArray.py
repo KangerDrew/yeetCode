@@ -73,16 +73,32 @@ def findKthLargestQuickSelect(nums, k):
 
         # Get the pivot value
         pivot = nums[r]
-        # Define a pointer that will
+        # Define a pointer that will swap larger pivot values to the "larger"
+        # portion (the right side of the array)
         pointer = l
 
         # Loop through the array from l to r - 1:
         for i in range(l, r):
 
             if nums[i] <= pivot:
+                nums[pointer], nums[i] = nums[i], nums[pointer]
+                pointer += 1
+
+        # At the end, we swap the pivot value at the rightmost position of the array
+        # with the element at the pointer:
+
+        nums[pointer], nums[r] = nums[r], nums[pointer]
+
+        if pointer > k:
+            return quickSelect(l, pointer - 1)
+        elif pointer < k:
+            return quickSelect(pointer + 1, r)
+        else:
+            return nums[pointer]
+
+    return quickSelect(left, right)
 
 
-
-
+print(findKthLargestQuickSelect([3, 2, 1, 5, 6, 4], 2))
 
 
