@@ -1,4 +1,5 @@
 import heapq
+import random
 
 
 # The easiest solution would be to simply sort the input array,
@@ -57,5 +58,31 @@ print(findKthLargestHeap([3, 2, 1, 5, 6, 4], 2))
 # all elements of the array larger than that value. If it's less, then we assess the
 # lower half of the array. If neither, it meant that we've hit the target "kth" value
 # so we return that value.
+
+def findKthLargestQuickSelect(nums, k):
+
+    # Get the left and right boundaries
+    left, right = 0, len(nums) - 1
+
+    def quickSelect(l, r):
+
+        # First randomly select a pivot element index from nums array:
+        rand_i = random.randint(l, r)
+        # Then, place the random element at the rightmost index (swap them):
+        nums[rand_i], nums[r] = nums[r], nums[rand_i]
+
+        # Get the pivot value
+        pivot = nums[r]
+        # Define a pointer that will
+        pointer = l
+
+        # Loop through the array from l to r - 1:
+        for i in range(l, r):
+
+            if nums[i] <= pivot:
+
+
+
+
 
 
