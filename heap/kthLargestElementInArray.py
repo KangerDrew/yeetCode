@@ -49,3 +49,13 @@ print(findKthLargestHeap([3, 2, 1, 5, 6, 4], 2))
 
 # SOLUTION #2 - Quick Select Algorithm:
 
+# The concept behind the quick select algorithm is simple. Select a random element
+# from an unsorted array, and divide up the array into two partition - One half is
+# greater than the random value, and the other half is are less. This will determine
+# the "kth" largest position of the randomly selected element. If this randomly
+# selected element is less than the specified kth position, we recursively assess
+# all elements of the array larger than that value. If it's less, then we assess the
+# lower half of the array. If neither, it meant that we've hit the target "kth" value
+# so we return that value.
+
+
