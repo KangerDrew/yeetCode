@@ -8,6 +8,7 @@ class ListNode:
 
 def mergeKLists(lists):
 
+    # This is a solution for the easier variant problem:
     def mergeList(l1, l2):
         dummy = ListNode()
         tail = dummy
@@ -30,6 +31,9 @@ def mergeKLists(lists):
 
         return dummy.next
 
+    # Here is where the real function begins:
+
+    # Edge case, where we are given an empty "lists"
     if not lists or len(lists) == 0:
         return None
 
@@ -45,4 +49,3 @@ def mergeKLists(lists):
         lists = mergedLists
 
     return lists[0]
-
