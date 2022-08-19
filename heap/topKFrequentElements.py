@@ -10,19 +10,20 @@ import heapq
 # the size of the heap as k, the min-heap will keep track of the k most frequent
 # counts.
 
-test = [1, 1, 1, 2, 2, 3]
-test_count = Counter(test)
-print(test_count)
-print(test_count[69])
-print(test_count)
+# test = [1, 1, 1, 2, 2, 3]
+# test_count = Counter(test)
+# print(test_count)
+# print(test_count[69])
+# print(test_count)
+#
+# other_count = defaultdict(int)
+# other_count["a"] += 1
+# other_count["b"] += 4
+# print(other_count)
+# print(other_count["g"])
+# print(other_count.items())
 
-other_count = defaultdict(int)
-other_count["a"] += 1
-other_count["b"] += 4
-print(other_count)
-print(other_count["g"])
-print(other_count)
-
+# Solution from leetcode:
 def topKFrequent(nums, k):
     # O(1) time
     if k == len(nums):
@@ -35,4 +36,8 @@ def topKFrequent(nums, k):
     # convert it into an output array
     # O(N log k) time
     return heapq.nlargest(k, count.keys(), key=count.get)
+
+
+print(topKFrequent([1, 1, 1, 1, 3, 3, 4], 2))
+
 
