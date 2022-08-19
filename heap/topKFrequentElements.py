@@ -24,6 +24,12 @@ import heapq
 # print(other_count.items())
 
 # Solution #1 - Min-Heap:
+# This solution runs in O(n log (k) ) time, since we create a heap of size k
+# and we perform push-pop operation n times to keep only the integers with highest
+# frequency
+
+# The space complexity is O(n + k), where n would be the max size of a hash map we
+# create to keep the frequency, and k is the size of the min-heap.
 def topKFrequent(nums, k):
     # O(1) time
     if k == len(nums):
@@ -62,3 +68,21 @@ def topKFrequentLambda(nums, k):
 print(topKFrequentLambda([1, 1, 1, 1, 3, 3, 4], 2))
 
 # Solution #2 - Bucket Sort:
+def topKFrequentBucket(nums, k):
+
+    count = {}
+    freq = [[] for i in range(len(nums) + 1)]
+
+    for n in nums:
+        count[n] = 1 + count.get(n, 0)
+
+    for n, c in count.items():
+        freq[c].append(n)
+
+    res = []
+
+    for i in range(len(freq) - 1, 0, -1):
+        for n in freq[i]:
+            res.append(n)
+            if len(res) == k:
+                return res
