@@ -23,7 +23,7 @@ import heapq
 # print(other_count["g"])
 # print(other_count.items())
 
-# Solution from leetcode:
+# Solution #1 - Min-Heap:
 def topKFrequent(nums, k):
     # O(1) time
     if k == len(nums):
@@ -60,3 +60,5 @@ def topKFrequentLambda(nums, k):
 
 # This returns a list of tuples, with both the numbers and their frequencies:
 print(topKFrequentLambda([1, 1, 1, 1, 3, 3, 4], 2))
+
+# Solution #2 - Bucket Sort:
