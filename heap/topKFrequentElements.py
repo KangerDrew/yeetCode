@@ -40,4 +40,23 @@ def topKFrequent(nums, k):
 
 print(topKFrequent([1, 1, 1, 1, 3, 3, 4], 2))
 
+# Using lambda function for ease of explanation. INVALID SOLUTION:
+def topKFrequentLambda(nums, k):
 
+    # Edge case:
+    if k == len(nums):
+        return nums
+
+    # Convert the provided nums array into a counter dictionary
+    count = Counter(nums)
+    # Convert it to a list of tuples - (number from nums, frequency of that number)
+    tuple_count = list(count.items())
+
+    # key in the nlargest function is specifying to retrieve the nlargest value in the
+    # provided tuple_count, using the "frequency of that number" value (i.e. index
+    # 1 value of the tuple)
+    return heapq.nlargest(k, tuple_count, key=lambda a: a[1])
+
+
+# This returns a list of tuples, with both the numbers and their frequencies:
+print(topKFrequentLambda([1, 1, 1, 1, 3, 3, 4], 2))
