@@ -67,7 +67,7 @@ def topKFrequentLambda(nums, k):
 # This returns a list of tuples, with both the numbers and their frequencies:
 print(topKFrequentLambda([1, 1, 1, 1, 3, 3, 4], 2))
 
-# Solution #2 - Bucket Sort:
+# Solution #2 - "Bucket" Sort:
 def topKFrequentBucket(nums, k):
 
     # count is a dictionary that keeps track of the frequency
