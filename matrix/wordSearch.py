@@ -95,21 +95,10 @@ def wordSearchWPruning(board, word):
             count[board[n][m]] += 1
 
     for letter in word:
-        if count[letter]:
+        if count[letter] > 0:
             count[letter] -= 1
         else:
             return False
-
-    # LEETCODE SPECIFIC PRUNING - INVALID ELSEWHERE:
-    # The below "pruning" works to speed up the test case #47,
-    # where we have a board filled with A's and two B's, and our
-    # given string is AAAAAAAAAAAAABB. If we flip the word and
-    # check starting with B first, the recursive function will not
-    # run more than 1 level because there are no sections on the
-    # board where there are two adjacent Bs!
-    if word[0] in count and word[-1] in count:
-        if count[word[0]] > count[word[-1]]:
-            word = word[::-1]
 
     # We need to keep track of which section has been travelled
     travelled = set()
