@@ -9,9 +9,11 @@ def rotate(matrix):
     l, r = 0, len(matrix) - 1
 
     while l < r:
-        # We will get values from 0 to r - 1, and rotate the matrix clockwise.
+        # We will get values from 0 to r - l (width of the outer-sub matrix we're working on),
+        # and rotate the matrix clockwise...
+
         # See video explanation on youtube for visualization:
-        for i in range(r - 1):
+        for i in range(r - l):
             # We are assuming all matrices will be square, so we can
             # get the top and bottom easily:
             top, bottom = l, r
@@ -35,7 +37,7 @@ def rotate(matrix):
         r -= 1
         l += 1
 
-    return None
 
-
-
+testmatrix = [[1,2,3],[4,5,6],[7,8,9]]
+rotate(testmatrix)
+print(testmatrix)
