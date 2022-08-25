@@ -30,17 +30,25 @@ def reverseCORRECTED(head):
     if not head.next:
         return head
 
+    # Set up 3 pointers to help us traverse down the list:
     pre = None
     current = head
     after = head.next
 
+    # Use while loop to traverse down the list:
     while current:
 
+        # Point current node backwards towards pre:
         current.next = pre
+        # Move pre pointer to current:
         pre = current
 
+        # Check if our after pointer is null. If so, it means we've
+        # finished reversing and must return the current node:
         if not after:
             return current
 
+        # Move current pointer to after:
         current = after
+        # Move after pointer to the node after that:
         after = after.next
