@@ -24,6 +24,7 @@ def hasCycle(head):
     return False
 
 
+# Cleaner, shorter solution:
 def hasCycleClean(head):
     slow, fast = head, head
 
