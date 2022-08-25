@@ -94,6 +94,8 @@ def wordSearchWPruning(board, word):
         for m in range(columns):
             count[board[n][m]] += 1
 
+    # Now check if there are enough letters in the matrix. If we go below
+    # negative number, OR the letter doesn't exist, return False:
     for letter in word:
         if count[letter] > 0:
             count[letter] -= 1
