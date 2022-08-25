@@ -22,3 +22,16 @@ def hasCycle(head):
             return True
 
     return False
+
+
+def hasCycleClean(head):
+    slow, fast = head, head
+
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+
+        if slow == fast:
+            return True
+
+    return False
