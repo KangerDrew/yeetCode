@@ -20,3 +20,7 @@ def nonOverlappingIntervals(intervals):
 
     return count
 
+
+# The approach for non-overlapping interval is to sort the provided
+# interval list by their first interval value, and keep track of a count
+# value...
