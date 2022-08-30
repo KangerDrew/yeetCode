@@ -1,0 +1,3 @@
+# We need to do more than just sort the interval by their first value...
+def meetingRoomsII(intervals):
+    intervals.sort(key=lambda i: i[0])
