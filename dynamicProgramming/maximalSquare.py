@@ -8,5 +8,6 @@
 # from 1, 1 position, and see what the previous top, previous left, and previous
 # topleft largest square value was. The minimum between these values, and the
 # current value (whether it's 1 or 0) will determine the largest possible square
-# length at that given position, when excluding the remaining matrix at the bottom
+# length at that given position, when excluding the remaining matrix at the bottom.
 
+# See solution on leetcode or video for better visualization explanation...
