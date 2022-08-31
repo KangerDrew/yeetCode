@@ -25,11 +25,15 @@ def maximalSquare(matrix):
             if matrix[r][c] == "1":
                 memo[r][c] = 1
 
+                # Extra safeguard to make sure we only use memoization for positions that
+                # are NOT leftmost and topmost:
                 if r > 0 and c > 0:
                     memo[r][c] += min(memo[r - 1][c], memo[r][c - 1], memo[r - 1][c - 1])
 
+                # Update the current max length:
                 currentMaxLen = max(currentMaxLen, memo[r][c])
 
+    # return the largest possible square area:
     return currentMaxLen * currentMaxLen
 
 
