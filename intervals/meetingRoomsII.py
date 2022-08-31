@@ -18,11 +18,28 @@ import heapq
 def meetingRoomsIIHeap(intervals):
 
     intervals.sort(key=lambda i: i[0])
-    # Initialize a heap (ongoing meetings), but first add the first meeting:
-    ongoing_meetings = [intervals[0]]
+    # Initialize a heap (ongoing meetings), but first add the end
+    # time of the first meeting:
+    ongoing_meetings = [intervals[0][1]]
     heapq.heapify(ongoing_meetings)
 
+    # Now, loop through the remaining meetings (everything except
+    # the first one):
+    for meeting in intervals[1:]:
 
+        # Check if the current meeting's starting time will conflict
+        # with the earliest end time in the heap:
+        if ongoing_meetings[0] > meeting[0]:
+            # If an existing room won't be available, we need to add the
+            # current meeting's end time to the heap:
+            heapq.heappush(ongoing_meetings, meeting[1])
+        else:
+            # Otherwise, an existing room can be emptied and the current
+            # meeting can take place there instead:
+            heapq.heappushpop(ongoing_meetings, meeting[1])
+
+    # Return the length of the ongoing_meetings, as it'll contain only the
+    # meetings that didn't get removed unless necessary:
     return len(ongoing_meetings)
 
 
