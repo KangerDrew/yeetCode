@@ -13,14 +13,33 @@
 # See solution on leetcode or video for better visualization explanation...
 
 def maximalSquare(matrix):
+    rows, columns = len(matrix), len(matrix[0])
+    memo = [[0 for i in range(columns)] for j in range(rows)]
+    currentMaxLen = 0
 
-    memo = [[0 for i in range(len(matrix[0]))] for j in range(len(matrix))]
-    currentMaxMin = 0
+    for r in range(rows):
+        for c in range(columns):
+
+            # The largest square at a given position cannot be greater than zero
+            # if the value is not "1" in the matrix. Check if the value is "1":
+            if matrix[r][c] == "1":
+                memo[r][c] = 1
+
+                if r > 0 and c > 0:
+                    memo[r][c] += min(memo[r - 1][c], memo[r][c - 1], memo[r - 1][c - 1])
+
+                currentMaxLen = max(currentMaxLen, memo[r][c])
+
+    return currentMaxLen * currentMaxLen
 
 
-
-    return currentMaxMin
-
-
-maximalSquare([["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]])
-maximalSquare([["0","1"],["1","0"]])
+# print(maximalSquare(
+#     [["1", "0", "1", "0", "0"], ["1", "0", "1", "1", "1"], ["1", "1", "1", "1", "1"], ["1", "0", "0", "1", "0"]]))
+# print(maximalSquare([["0", "1"], ["1", "0"]]))
+print(maximalSquare([["1", "0", "1", "1", "0", "1"],
+                     ["1", "1", "1", "1", "1", "1"],
+                     ["0", "1", "1", "0", "1", "1"],
+                     ["1", "1", "1", "0", "1", "0"],
+                     ["0", "1", "1", "1", "1", "1"],
+                     ["1", "1", "0", "1", "1", "1"]
+                     ]))
