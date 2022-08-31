@@ -11,3 +11,16 @@
 # length at that given position, when excluding the remaining matrix at the bottom.
 
 # See solution on leetcode or video for better visualization explanation...
+
+def maximalSquare(matrix):
+
+    memo = [[0 for i in range(len(matrix[0]))] for j in range(len(matrix))]
+    currentMaxMin = 0
+
+
+
+    return currentMaxMin
+
+
+maximalSquare([["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]])
+maximalSquare([["0","1"],["1","0"]])
