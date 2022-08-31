@@ -1,8 +1,9 @@
 import heapq
 
+
 # We need to do more than just sort the interval by their first value...
 
-# Alternate method 1 - Use Priority Queue (min heaps!)
+# Method 1 - Use Priority Queue (min heaps!)
 # Idea is to first sort the intervals by their initial value, then we
 # create a min-heap (python's heapq is min-heap by default) that keeps
 # track of each meeting's end time. The min value of this heap will give
@@ -16,7 +17,6 @@ import heapq
 # interval we're adding does not conflict with the earliest ending time).
 
 def meetingRoomsIIHeap(intervals):
-
     intervals.sort(key=lambda i: i[0])
     # Initialize a heap (ongoing meetings), but first add the end
     # time of the first meeting:
@@ -43,5 +43,31 @@ def meetingRoomsIIHeap(intervals):
     return len(ongoing_meetings)
 
 
+# Method 2 - Assess beginning and ending separately:
+# This requires the beginning and end to be sorted separately!!
+
 def meetingRoomsII(intervals):
-    intervals.sort(key=lambda i: i[0])
+
+    beginningTimes = [i[0] for i in intervals]
+    endingTimes = [j[1] for j in intervals]
+
+    beginningTimes.sort()
+    endingTimes.sort()
+
+    maxCount, currentCount = 0, 0
+
+    b, e = 0, 0
+
+    while b < len(intervals):
+
+        if beginningTimes[b] < endingTimes[e]:
+            b += 1
+            currentCount += 1
+        else:
+            e += 1
+            currentCount -= 1
+
+        maxCount = max(maxCount, currentCount)
+
+    return maxCount
+
