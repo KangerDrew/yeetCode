@@ -10,4 +10,17 @@
 
 # Add +1 to the index value when returning... Not sure why...
 
-def twoSumsII(numbers):
+def twoSumsII(numbers, target):
+
+    start, end = 0, len(numbers) - 1
+
+    while end > start:
+
+        current_sum = numbers[end] + numbers[start]
+
+        if current_sum == target:
+            return [start + 1, end + 1]
+        elif current_sum > target:
+            end -= 1
+        else:
+            start += 1
