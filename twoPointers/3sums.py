@@ -19,17 +19,15 @@
 
 
 def threeSum(nums):
-
     all_sums = []
     # Use .sort() function:
     nums.sort()
-
 
     # Begin looping from the start of the sorted list:
     for start, start_val in enumerate(nums):
 
         # As mentioned earlier, if the start pointer reaches/exceeds 0,
-        # it means there are no possible combinations left:
+        # it means there are no possible combinations left. Break:
         if start_val >= 0:
             break
 
@@ -41,6 +39,22 @@ def threeSum(nums):
         if start > 0 and start_val == nums[start - 1]:
             continue
 
+        # The rest of the problem is just going to be two sums problem, using
+        # -1 * start_val as the target value:
+        left, right = start + 1, len(nums) - 1
+
+        while right > left:
+
+            current_sum = nums[start] + nums[left] + nums[right]
+            if current_sum == 0:
+                all_sums.append([nums[start], nums[left], nums[right]])
+            elif current_sum > 0:
+                right -= 1
+            else:
+                left += 1
+
+    # Once above loop exits, we return all_sums array:
+    return all_sums
 
 
-
+print(threeSum([-1, 0, 1, 2, -1, -4]))
