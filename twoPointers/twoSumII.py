@@ -12,8 +12,10 @@
 
 def twoSumsII(numbers, target):
 
+    # Initialize two pointers
     start, end = 0, len(numbers) - 1
 
+    # Use while loop to increment the pointers:
     while end > start:
 
         current_sum = numbers[end] + numbers[start]
@@ -24,3 +26,6 @@ def twoSumsII(numbers, target):
             end -= 1
         else:
             start += 1
+
+    # We don't need a return statement, since it was given that
+    # we will have ONE solution.
