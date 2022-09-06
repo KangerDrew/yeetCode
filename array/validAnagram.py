@@ -32,3 +32,9 @@ def validAnagram(s, t):
 
     # If the above for loop didn't return False, it means we have valid anagrams:
     return True
+
+
+# Another Solution - sort two inputs individually and see if
+# they match:
+def validAnagramsSort(s, t):
+    return sorted(s) == sorted(t)
