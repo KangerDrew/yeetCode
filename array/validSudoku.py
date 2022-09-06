@@ -1,0 +1,3 @@
+# We can use a fresh new hashset set to validate whether
+# each row/column is valid sudoku. However, checking each
+# 3x3 sub-boxes will be slightly more tricky...
