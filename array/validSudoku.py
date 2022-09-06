@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 # For rules 1 & 2:
 # We can use a hashset set to validate whether each row/column is valid
 # sudoku. To make the algorithm runtime efficient, we will be using two
@@ -18,7 +19,6 @@ from collections import defaultdict
 
 
 def validSudoku(board):
-
     # Create dictionaries (hash maps) that will keep track of which
     # row/columns/boxes contain which number:
     columns = defaultdict(set)
@@ -37,8 +37,8 @@ def validSudoku(board):
             # If the value already exist in the column/row/sub-box,
             # we need to return False:
             if (board[r][c] in rows[r] or
-                board[r][c] in columns[c] or
-                board[r][c] in boxes[(r // 3, c // 3)]):
+                    board[r][c] in columns[c] or
+                    board[r][c] in boxes[(r // 3, c // 3)]):
                 return False
 
             # Otherwise, we store the value into the hash maps:
