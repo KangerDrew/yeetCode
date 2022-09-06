@@ -37,4 +37,6 @@ def validAnagram(s, t):
 # Another Solution - sort two inputs individually and see if
 # they match:
 def validAnagramsSort(s, t):
+    # sorted() gives us a list, not a string! But Python can
+    # properly handle two lists w same inputs:
     return sorted(s) == sorted(t)
