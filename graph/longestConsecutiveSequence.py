@@ -37,7 +37,7 @@ def findSequenceUsingSort(nums):
         # is different:
         if nums[i] != nums[i + 1]:
             # Check if the next value is greater by 1:
-            if nums[i] + 1 == nums[i + 1]:
+            if nums[i + 1] == nums[i] + 1:
                 current_sequence += 1
             # If not, that means current_sequence is at max. Thus
             # compare it with the largest_sequence, and take the
