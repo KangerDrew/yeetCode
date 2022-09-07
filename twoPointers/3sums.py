@@ -13,7 +13,7 @@
 # to conduct a two sum II problem, where the two sum value must be the "opposite
 # number" to that of the one in the starting pointer!
 
-# NOTE - if value at the start pointer reaches/exceeds 0, that means we can finish
+# NOTE - if value at the start pointer exceeds 0, that means we can finish
 # looking for possible combo since all the values remaining for testing will
 # always return sum greater than zero!
 
@@ -26,9 +26,11 @@ def threeSum(nums):
     # Begin looping from the start of the sorted list:
     for start, start_val in enumerate(nums):
 
-        # As mentioned earlier, if the start pointer reaches/exceeds 0,
-        # it means there are no possible combinations left. Break:
-        if start_val >= 0:
+        # As mentioned earlier, if the start pointer exceeds 0,
+        # it means there are no possible combinations left. NOTE that
+        # we can still have valid combination with 0 as start_val,
+        # assuming the following values are also zeros (ex. [0, 0, 0])
+        if start_val > 0:
             break
 
         # Furthermore, we need to check that the current value is NOT
@@ -46,8 +48,21 @@ def threeSum(nums):
         while right > left:
 
             current_sum = nums[start] + nums[left] + nums[right]
+
+            # Check if current_sum is zero or not. Adjust left/right
+            # pointer
             if current_sum == 0:
                 all_sums.append([nums[start], nums[left], nums[right]])
+
+                # IMPORTANT! We need to increment either left/right pointer
+                # after appending so we can search for other possible combination
+                # that uses start_val:
+                right -= 1
+                # THEN, we need to confirm that this new value is not a repeat of the
+                # previous value AND that we're not going out of bounds. Increment
+                # again until we find a unique value:
+                while nums[right] == nums[right + 1] and right > 0:
+                    right -= 1
             elif current_sum > 0:
                 right -= 1
             else:
@@ -57,4 +72,6 @@ def threeSum(nums):
     return all_sums
 
 
-print(threeSum([-1, 0, 1, 2, -1, -4]))
+test_arr = [-1, 0, 1, 2, -1, -4]
+print(threeSum(test_arr))
+print(test_arr)
