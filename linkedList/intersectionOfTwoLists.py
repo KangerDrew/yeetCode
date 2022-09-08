@@ -56,10 +56,10 @@ def intersectionPointers(headA, headB):
     p1, p2 = headA, headB
 
     # This while loop will persist until one of the following scenarios:
-    # Scenario 1A - Intersection is reached after A + B + C
-    # Scenario 1B - Intersection is reached after A or B (A and B have same length)
-    # Scenario 2 - No intersection exists, and while loop exists after the pointer
-    # reaches the None at the end of the two combined list (end of A + B + 2C)
+    # Scenario 1A - Intersection is reached after length A + B + C
+    # Scenario 1B - Intersection is reached after length A or B (A and B have same length)
+    # Scenario 2 - No intersection exists, and while loop exists after both pointers reach
+    # the None at the end of the length of two combined list (end of A + B + 2C)
 
     while p1 != p2:
 
