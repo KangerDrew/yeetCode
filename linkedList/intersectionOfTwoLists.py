@@ -32,16 +32,42 @@ def intersectionHashSet(headA, headB):
 
 # We can visualize the above intersecting linked list as two separate lists:
 # A1 => A2 => C1 => C2 => C3 => NONE
-# <    A    > <       C       >
+# <    A    > <          C          >
 # B1 => C1 => C2 => C3 => NONE
-# < B > <       C       >
+# < B > <          C          >
 # Let's label comp
 
 # Now, try adding two separate lists, twice in different order:
-# A1 => A2 => C1 => C2 => C3 => B1 => C1 => C2 => C3 => NONE
-# B1 => C1 => C2 => C3 => A1 => A2 => C1 => C2 => C3 => NONE
-# <    A    > < B > <       C       >
+# A1 => A2 => C1 => C2 => C3 => NONE => B1 => C1 => C2 => C3 => NONE
+# B1 => C1 => C2 => C3 => NONE => A1 => A2 => C1 => C2 => C3 => NONE
+# <    A    > < B > <          C          >
 
 # The length of each lists is: A + B + 2C
 # Note that the intersection occurs C distance from the end of the list.
+# If we iterate A + B + C distance from the root of either list, we will
+# always end up at the intersection point (assuming there is one). Sometimes
+# the intersection can be reached earlier, but only if distance A and B are
+# equal.
+
+
+def intersectionPointers(headA, headB):
+
+    # Initialize 2 pointers:
+    p1, p2 = headA, headB
+
+    # This while loop will persist until one of the following scenarios:
+    # Scenario 1A - Intersection is reached after A + B + C
+    # Scenario 1B - Intersection is reached after A or B (A and B have same length)
+    # Scenario 2 - No intersection exists, and while loop exists after the pointer
+    # reaches the None at the end of the two combined list (end of A + B + 2C)
+
+    while p1 != p2:
+
+        p1 = p1.next if p1 else headB
+        p2 = p2.next if p2 else headA
+
+    # The while loop above will always exit, either when we find the intersection,
+    # or when we reach the end of the two combined list. Once that happens, we return
+    # either one of the pointer:
+    return p1
 
