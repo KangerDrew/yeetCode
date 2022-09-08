@@ -40,3 +40,32 @@ print(coin_change([1, 2, 5], 11))
 print(coin_change([2], 3))
 print(coin_change([2, 5], 12))
 
+
+# Attempting to solve this problem using recursive helper with memoization:
+def coin_change_dfs(coins, amount):
+
+    if amount == 0:
+        return 0
+
+    memo = {}
+    def helper(remainder):
+        if remainder in memo:
+            return memo[remainder]
+
+        if remainder == 0:
+            return 0
+
+        if remainder < 0:
+            return None
+
+        for c in coins:
+            new_remainder = remainder - c
+            minimum_remain = helper(new_remainder)
+            if minimum_remain:
+                memo[remainder] = min(minimum_remain + 1, memo[remainder])
+
+        return memo[remainder]
+
+    return helper(amount)
+
+
