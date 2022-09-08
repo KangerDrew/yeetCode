@@ -20,3 +20,7 @@ def intersectionHashSet(headA, headB):
         headB = headB.next
 
     return None
+
+
+# There is a way to solve this problem without using hash set (O(1) memory)
+# It involves the use of two pointers...
