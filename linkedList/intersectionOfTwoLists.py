@@ -2,7 +2,6 @@
 # nodes of one of the list and then iterate through the second list
 #  and check to see if the node already exists in the hash set:
 
-
 def intersectionHashSet(headA, headB):
 
     stored = set()
