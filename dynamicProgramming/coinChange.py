@@ -1,39 +1,9 @@
-def coin_change_trash(coins, amount):
-    if amount == 0:
-        return 0
-
-    possible_route = [None] * (amount + 1)
-    possible_route[0] = []
-
-    for i, route in enumerate(possible_route):
-        if route is not None:
-            for coin in coins:
-                combo = route + [coin]
-
-                if (i + coin) <= amount:
-                    if possible_route[i + coin] is None or (len(possible_route[i + coin]) > len(combo)):
-                        possible_route[i + coin] = combo
-
-    return possible_route[-1]
-
-
+# Bottom up approach, where we use array to keep track of minimum
+# number of coin to reach a certain index (amount):
 def coin_change(coins, amount):
     if amount == 0:
         return 0
 
-    table = [None] * (amount + 1)
-    table[0] = 0
-
-    for i, route in enumerate(table):
-        if table[i] is not None:
-            for coin in coins:
-                test_val = table[i] + 1
-
-                if (i + coin) <= amount:
-                    if table[i + coin] is None or (table[i + coin] > test_val):
-                        table[i + coin] = test_val
-
-    return table[-1] if table[-1] is not None else -1
 
 
 # print(coin_change([1, 2, 5], 11))
@@ -42,7 +12,7 @@ def coin_change(coins, amount):
 
 
 # Attempting to solve this problem using recursive helper with memoization:
-def coin_change_recur(coins, amount):
+def coin_change_topdown(coins, amount):
 
     # Edge case: If 0 is entered, return 0
     if amount == 0:
@@ -87,4 +57,4 @@ def coin_change_recur(coins, amount):
     return memo[amount] if memo[amount] != float('inf') else -1
 
 
-print(coin_change_recur([1, 2, 5], 11))
+print(coin_change_topdown([1, 2, 5], 11))
