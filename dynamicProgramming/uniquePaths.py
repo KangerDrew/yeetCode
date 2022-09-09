@@ -39,12 +39,12 @@ def uniquePathsBottomUp(m, n):
 
     return grid[-1][-1]
 
+
 # Same bottom up approach, w less memory usage
 def uniquePathsBottomUpLessMem(m, n):
-    row = [0 for i in range(n + 1)]
-    row[1] = 1
+    row = [1 for i in range(n + 1)]
 
-    for j in range(m):
+    for j in range(m - 1):
 
         newRow = [0 for k in range(n + 1)]
 
@@ -53,4 +53,4 @@ def uniquePathsBottomUpLessMem(m, n):
 
         row = newRow
 
-    return newRow[-1]
+    return row[-1]
