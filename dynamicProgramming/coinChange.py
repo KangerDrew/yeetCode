@@ -13,14 +13,28 @@ def coin_change(coins, amount):
     memo = [float('inf') for i in range(amount + 1)]
     memo[0] = 0
 
+    # Loop through each index:
     for i in range(amount + 1):
 
+        # If the current value cannot even be reached to begin with (i.e.
+        # the value here is float('inf') then we don't need to check for
+        # possible branching path from this index (amount). Otherwise, we
+        # loop through our possible coin options to see what kind of minimum
+        # coin count they can give:
         if memo[i] != float('inf'):
             for c in coins:
+                # Possible min value is we simply add +1 coin from our
+                # current min val, which is memo[i]
                 possible_min = memo[i] + 1
+                # Ensure we're not going out of bounds:
                 if i + c < amount + 1:
+                    # Compare the already existing min value at i + c index, against
+                    # the possible_min. Take the lower value between the two:
                     memo[i + c] = min(memo[i + c], possible_min)
 
+    # Return the last value at memoization array. If the value is
+    # float('inf') however, it means we found no way to reach the
+    # input amount with a given coins. If so, return -1 instead:
     return memo[-1] if memo[-1] != float('inf') else -1
 
 
