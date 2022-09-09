@@ -36,13 +36,13 @@ def coin_change(coins, amount):
     return table[-1] if table[-1] is not None else -1
 
 
-print(coin_change([1, 2, 5], 11))
-print(coin_change([2], 3))
-print(coin_change([2, 5], 12))
+# print(coin_change([1, 2, 5], 11))
+# print(coin_change([2], 3))
+# print(coin_change([2, 5], 12))
 
 
 # Attempting to solve this problem using recursive helper with memoization:
-def coin_change_dfs(coins, amount):
+def coin_change_recur(coins, amount):
 
     if amount == 0:
         return 0
@@ -51,21 +51,22 @@ def coin_change_dfs(coins, amount):
     def helper(remainder):
         if remainder in memo:
             return memo[remainder]
-
         if remainder == 0:
             return 0
-
         if remainder < 0:
-            return None
+            return float('inf')
 
+        min_val = float('inf')
         for c in coins:
-            new_remainder = remainder - c
-            minimum_remain = helper(new_remainder)
-            if minimum_remain:
-                memo[remainder] = min(minimum_remain + 1, memo[remainder])
 
-        return memo[remainder]
+            min_val = min(helper(remainder - c) + 1, min_val)
 
-    return helper(amount)
+        memo[remainder] = min_val
+        return min_val
+
+    helper(amount)
+
+    return memo[amount] if memo[amount] != float('inf') else -1
 
 
+print(coin_change_recur([1, 2, 5], 11))
