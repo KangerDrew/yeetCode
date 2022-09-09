@@ -1,29 +1,17 @@
-def uniquePaths(m, n):
+# Topdown memoization solution:
 
-    grid = []
+def uniquePathsTopdown(m, n):
+    memo = {}
 
-    for i in range(m + 1):
-        grid.append([0] * (n + 1))
+    def helper(r, c):
+        if r == 1 or c == 1:
+            return 1
 
-    grid[1][1] = 1
+        if (r, c) in memo:
+            return memo[(r, c)]
 
-    for i in range(1, m + 1):
+        sol = helper(r - 1, c) + helper(r, c - 1)
+        memo[(r, c)] = sol
+        return sol
 
-        for j in range(1, n + 1):
-            grid[i][j] += grid[i - 1][j] + grid[i][j - 1]
-
-    return grid[-1][-1]
-
-
-print(uniquePaths(2, 3))
-
-
-def uniquePathsRecursive(m, n):
-
-    if n == 1 or m == 1:
-        return 1
-
-    return uniquePathsRecursive(m - 1, n) + uniquePathsRecursive(m, n - 1)
-
-
-print(uniquePathsRecursive(2, 3))
+    return helper(m, n)
