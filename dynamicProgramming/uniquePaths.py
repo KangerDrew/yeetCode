@@ -24,3 +24,33 @@ def uniquePathsTopdown(m, n):
 
     # Use helper:
     return helper(m, n)
+
+
+# Bottom up approach to the same problem:
+def uniquePathsBottomUp(m, n):
+
+    grid = [[0 for j in range(n + 1)] for i in range(m + 1)]
+    grid[1][1] = 1
+
+    for i in range(1, m + 1):
+
+        for j in range(1, n + 1):
+            grid[i][j] += grid[i - 1][j] + grid[i][j - 1]
+
+    return grid[-1][-1]
+
+# Same bottom up approach, w less memory usage
+def uniquePathsBottomUpLessMem(m, n):
+    row = [0 for i in range(n + 1)]
+    row[1] = 1
+
+    for j in range(m):
+
+        newRow = [0 for k in range(n + 1)]
+
+        for cur in range(1, n + 1):
+            newRow[cur] = newRow[cur - 1] + row[cur]
+
+        row = newRow
+
+    return newRow[-1]
