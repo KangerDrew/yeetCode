@@ -4,11 +4,29 @@ def coin_change(coins, amount):
     if amount == 0:
         return 0
 
+    # Initialize an array of length amount + 1. Index 0 represents
+    # number of coins to reach amount 0, index 1 represents number
+    # of coins to reach 1, etc...
+
+    # Set default value to float('inf') for all index, except 0, where
+    # it takes 0 coins to reach amount 0:
+    memo = [float('inf') for i in range(amount + 1)]
+    memo[0] = 0
+
+    for i in range(amount + 1):
+
+        if memo[i] != float('inf'):
+            for c in coins:
+                possible_min = memo[i] + 1
+                if i + c < amount + 1:
+                    memo[i + c] = min(memo[i + c], possible_min)
+
+    return memo[-1] if memo[-1] != float('inf') else -1
 
 
-# print(coin_change([1, 2, 5], 11))
-# print(coin_change([2], 3))
-# print(coin_change([2, 5], 12))
+print(coin_change([1, 2, 5], 11))
+print(coin_change([2], 3))
+print(coin_change([2, 5], 12))
 
 
 # Attempting to solve this problem using recursive helper with memoization:
@@ -57,4 +75,4 @@ def coin_change_topdown(coins, amount):
     return memo[amount] if memo[amount] != float('inf') else -1
 
 
-print(coin_change_topdown([1, 2, 5], 11))
+# print(coin_change_topdown([1, 2, 5], 11))
