@@ -1,6 +1,5 @@
 # Topdown memoization solution:
 def uniquePathsTopdown(m, n):
-
     # Initialize memoization hash map:
     memo = {}
 
@@ -28,7 +27,6 @@ def uniquePathsTopdown(m, n):
 
 # Bottom up approach to the same problem:
 def uniquePathsBottomUp(m, n):
-
     grid = [[0 for j in range(n + 1)] for i in range(m + 1)]
     grid[1][1] = 1
 
@@ -43,6 +41,8 @@ def uniquePathsBottomUp(m, n):
 # Same bottom up approach, w less memory usage
 def uniquePathsBottomUpLessMem(m, n):
     row = [1 for i in range(n + 1)]
+    row[0] = 0  # This does nothing to the function, but added because it's how it's done
+    # in the original bottom up tabulation...
 
     for j in range(m - 1):
 
