@@ -9,12 +9,15 @@ def common(text1, text2):
 
     # We iterate through each letter of words, where row represent a
     # letter in text2, column represent a letter in text1. Extra column &
-    # row accounts for an "empty string"
+    # row at the beginning accounts for an "empty string"
+
+    # See back to back swe video for visual illustration!
 
     for row in range(1, (len(text2) + 1)):
 
         for column in range(1, (len(text1) + 1)):
-
+            # If the letters match, that means the solution for this current sub-string
+            # is 1 + "best solution, after current letter is removed"
             if text1[column - 1] == text2[row - 1]:
                 common_matrix[row][column] = common_matrix[row - 1][column - 1] + 1
             else:
