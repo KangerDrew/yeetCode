@@ -9,9 +9,9 @@ def bs(arr, target):
             return mid
 
         if arr[mid] < target:
-            left = mid
+            left = mid + 1
         else:
-            right = mid - 1
+            right = mid
 
     return left
 
@@ -28,8 +28,9 @@ arr3 = sorted([3, 5, 6, 2, 5, 4, 19, 5, 6, 7, 12])
 # print(arr3[bs(arr3, 11)])
 arr4 = sorted([4, 10, 4, 3, 8, 9])
 # [3, 4, 4, 8, 9, 10]
-for val in range(0, 10):
-    print(arr4[bs(arr4, val)])
+# for val in range(0, 10):
+#     print(arr4[bs(arr4, val)])
 arr5 = sorted([10, 9, 2, 5, 3, 7, 101, 18])
+# [2, 3, 5, 7, 9, 10, 18, 101]
 for val in range(0, 10):
     print(arr5[bs(arr5, val)])
