@@ -17,9 +17,11 @@ def common(text1, text2):
 
         for column in range(1, (len(text1) + 1)):
             # If the letters match, that means the solution for this current sub-string
-            # is 1 + "best solution, after current letter is removed"
+            # is 1 + "best solution, after current letters from both texts are removed"
             if text1[column - 1] == text2[row - 1]:
                 common_matrix[row][column] = common_matrix[row - 1][column - 1] + 1
+            # If the letters didn't match, that means the solution for the current sub-string is -
+            # max("text2 after its current letter is removed", "text1 after its current letter is removed")
             else:
                 common_matrix[row][column] = max(common_matrix[row - 1][column], common_matrix[row][column - 1])
 
