@@ -48,8 +48,11 @@ def lengthOfLIS(nums):
 
             i = 0
 
-            # Note: while loop will simply break if sub[i] is
-            # out of bounds... Weird...
+            # The reason why we don't have to worry about going out of
+            # bounds is because of the original if statement. Any num
+            # that is larger than the last value of sub will just be
+            # appended, and we won't perform a linear scan that goes out
+            # of bounds!!!
             while num > sub[i]:
                 i += 1
             sub[i] = num
@@ -57,11 +60,11 @@ def lengthOfLIS(nums):
     return len(sub)
 
 
-print(lengthOfLIS([4, 2, 1, 4, 3, 7]))
+# print(lengthOfLIS([4, 2, 1, 4, 3, 7]))
 print(lengthOfLIS([8, 1, 6, 2, 3, 10]))
-print(lengthOfLIS([3, 2, 1]))
-print(lengthOfLIS([1, 2, 3]))
 
+# print(lengthOfLIS([3, 2, 1]))
+# print(lengthOfLIS([1, 2, 3]))
 
 
 def lengthOfLISBinarySearch(nums):
