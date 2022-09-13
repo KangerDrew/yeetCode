@@ -10,17 +10,27 @@ def lengthOfLIS(nums):
     # edited sub list will still maintain the temporal order of the nums list.
 
     # Example: [8, 1, 6, 2, 3, 10]  # (see approach 2)
-    # When we get to analyzing 2 as our num, our sub list will be [1, 6].
-    # Since 2 is larger than 1 but smaller than the greatest (last) value
-    # of the sub list, the new sub list becomes [1, 2]. Notice that this
-    # new sub list changed its greatest value, thus allowing us to build it
-    # further in the following for loop iteration!
+    # When we get to analyzing 2 (index 3) as our num, our sub list will be [1, 6].
+    # Since 2 is larger than 1 but smaller than the greatest (last) value of the sub
+    # list, the new sub list becomes [1, 2]. Notice that this new sub list changed
+    # its greatest value, thus allowing us to build it further in the following
+    # for loop iteration!
 
     # Although this function returns the correct length, it does NOT return
     # the correct sub list. This happens when we start replacing the middle
     # values of our sub list (i.e length doesn't change but middle values
     # get tampered, resulting in non-valid sub list), instead of replacing the
     # largest value of sub list.
+
+    # Another example - [3, 4, 5, 1] will return the sub array of [1, 4, 5], even
+    # though such subarray does not exist in the original input. This happens
+    # because by the time we assess 1 (index 3), we're at a situation where we
+    # need to replace 1 into the sub, and 3 is the first value greater than or
+    # equal to 1.
+    # THE IMPORTANT THING is that the length of the sub is maintained, and if original
+    # array had additional values, the if statement will compare the following value
+    # with the last and largest value of sub array to see if we can append & increase
+    # the length of the sub array!
 
     sub = [nums[0]]
 
