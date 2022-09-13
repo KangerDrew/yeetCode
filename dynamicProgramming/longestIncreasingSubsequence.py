@@ -64,3 +64,37 @@ print(lengthOfLIS([1, 2, 3]))
 
 
 
+def lengthOfLISBinarySearch(nums):
+
+    def binarySearch(arr, target):
+        left = 0
+        right = len(arr) - 1
+
+        while left < right:
+            mid = left + (right - left) // 2
+            if arr[mid] == target:
+                return mid
+
+            if arr[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+
+        # At this point after while loop, right and left
+        # pointers have the exact same value:
+        return left
+
+    sub = [nums[0]]
+
+    for num in nums[1:]:
+        if num > sub[-1]:
+            sub.append(num)
+        else:
+            # Find the first element in sub that is
+            # greater than or equal to num
+
+            # Binary search:
+            i = binarySearch(sub, num)
+            sub[i] = num
+
+    return len(sub)
