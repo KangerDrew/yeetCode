@@ -14,7 +14,11 @@ def bs(arr, target):
         if arr[mid] < target:
             left = mid + 1
         else:
-            right = mid - 1
+            # it seems that not truncating the right pointer
+            # makes the binary search function always return
+            # a value that's larger than intended target, if
+            # target is not in the array!!!
+            right = mid
 
     return left
 
@@ -37,8 +41,12 @@ def bsMin(arr, target):
         if arr[mid] > target:
             right = mid - 1
         else:
+            # Unlike previous version, we
             left = mid + 1
 
+    # This if statement will decrement the pointer, depending
+    # on whether the result is greater than the intended target
+    # or not. Also make sure we don't go out of bounds:
     if target < arr[left] and left > 0:
         left -= 1
 
