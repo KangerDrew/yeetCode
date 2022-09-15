@@ -46,7 +46,7 @@ def topKFrequent(nums, k):
 
 print(topKFrequent([1, 1, 1, 1, 3, 3, 4], 2))
 
-# Using lambda function for ease of explanation. INVALID SOLUTION:
+# Using lambda function for ease of explanation. Valid solution!
 def topKFrequentLambda(nums, k):
 
     # Edge case:
