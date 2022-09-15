@@ -89,6 +89,9 @@ def lengthOfLISBinarySearch(nums):
         if arr[left] < target:
             left += 1
 
+        # fun fact: if we use the right side pointer instead of left,
+        # there's a chance that it could go out of bounds (-1)! This
+        # issue can be fixed by simply returning 0 instead...
         return left
 
     sub = [nums[0]]
