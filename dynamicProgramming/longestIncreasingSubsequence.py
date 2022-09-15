@@ -61,14 +61,13 @@ def lengthOfLIS(nums):
 
 
 # print(lengthOfLIS([4, 2, 1, 4, 3, 7]))
-print(lengthOfLIS([8, 1, 6, 2, 3, 10]))
+# print(lengthOfLIS([8, 1, 6, 2, 3, 10]))
 
 # print(lengthOfLIS([3, 2, 1]))
 # print(lengthOfLIS([1, 2, 3]))
 
 
 def lengthOfLISBinarySearch(nums):
-
     def binarySearch(arr, target):
         left = 0
         right = len(arr) - 1
@@ -81,11 +80,16 @@ def lengthOfLISBinarySearch(nums):
             if arr[mid] < target:
                 left = mid + 1
             else:
-                right = mid
+                right = mid - 1
 
         # At this point after while loop, right and left
-        # pointers have the exact same value:
-        return left
+        # pointers have the exact same value. Check if the
+        # that value is greater than target if not, increment
+        # pointer to the right by 1:
+        if arr[right] < target:
+            right += 1
+
+        return right
 
     sub = [nums[0]]
 
@@ -101,3 +105,7 @@ def lengthOfLISBinarySearch(nums):
             sub[i] = num
 
     return len(sub)
+
+
+# [2, 3, 4, 5, 5, 5, 6, 6, 7, 12, 19]
+print(lengthOfLISBinarySearch([3, 5, 6, 2, 5, 4, 19, 5, 6, 7, 12]))
