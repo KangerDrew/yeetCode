@@ -58,14 +58,21 @@ def topKFrequentLambda(nums, k):
     # Convert it to a list of tuples - (number from nums, frequency of that number)
     tuple_count = list(count.items())
 
+    # tuple_count = []
+    # # Attempting to convert counter to tuples:
+    # for key, repetition in count.items():
+    #     tuple_count.append((key, repetition))
+
     # key in the nlargest function is specifying to retrieve the nlargest value in the
     # provided tuple_count, using the "frequency of that number" value (i.e. index
     # 1 value of the tuple)
-    return heapq.nlargest(k, tuple_count, key=lambda a: a[1])
+    unprocessed_tuples = heapq.nlargest(k, tuple_count, key=lambda a: a[1])
+
+
 
 
 # This returns a list of tuples, with both the numbers and their frequencies:
-print(topKFrequentLambda([1, 1, 1, 1, 3, 3, 4], 2))
+print(topKFrequentLambda([1, 1, 1, 1, 3, 3, 4, 4, 4], 2))
 
 # Solution #2 - "Bucket" Grouping:
 def topKFrequentBucket(nums, k):
