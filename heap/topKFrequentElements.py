@@ -67,8 +67,12 @@ def topKFrequentLambda(nums, k):
     # provided tuple_count, using the "frequency of that number" value (i.e. index
     # 1 value of the tuple)
     unprocessed_tuples = heapq.nlargest(k, tuple_count, key=lambda a: a[1])
+    res = []
 
+    for item in unprocessed_tuples:
+        res.append(item[0])
 
+    return res
 
 
 # This returns a list of tuples, with both the numbers and their frequencies:
