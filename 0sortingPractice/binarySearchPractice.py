@@ -14,11 +14,15 @@ def bs(arr, target):
         if arr[mid] < target:
             left = mid + 1
         else:
-            right = mid
+            right = mid - 1
 
     return left
 
-# Attempting to write a binary search algo that returns:
+
+# Attempting to write a binary search algo that returns smaller value
+# if target doesn't exist in the arr:
+
+# [2, 3, 5], 4
 def bsMin(arr, target):
     # Everything same as previous BS algo
     # up till the if else statement...
@@ -30,6 +34,15 @@ def bsMin(arr, target):
         if arr[mid] == target:
             return mid
 
+        if arr[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    if target < arr[left] and left > 0:
+        left -= 1
+
+    return left
 
 
 arr1 = sorted([0, 1, 0, 3, 2, 3])
@@ -46,7 +59,8 @@ arr4 = sorted([4, 10, 4, 3, 8, 9])
 # [3, 4, 4, 8, 9, 10]
 # for val in range(0, 10):
 #     print(arr4[bs(arr4, val)])
-arr5 = sorted([10, 9, 2, 5, 3, 7, 101, 18])
-# [2, 3, 5, 7, 9, 10, 18, 101]
-for val in range(0, 10):
-    print(arr5[bs(arr5, val)])
+arr5 = sorted([10, 9, 2, 5, 3, 7, 101, 18, 10, 10, 10])
+# [2, 3, 5, 7, 9, 10, 18, 101, 10, 10, 10]
+for val in range(11, 30):
+    print("testing " + str(val))
+    print(arr5[bsMin(arr5, val)])
