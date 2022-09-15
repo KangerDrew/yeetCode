@@ -86,10 +86,10 @@ def lengthOfLISBinarySearch(nums):
         # pointers have the exact same value. Check if the
         # that value is greater than target if not, increment
         # pointer to the right by 1:
-        if arr[right] < target:
-            right += 1
+        if arr[left] < target:
+            left += 1
 
-        return right
+        return left
 
     sub = [nums[0]]
 
@@ -108,4 +108,5 @@ def lengthOfLISBinarySearch(nums):
 
 
 # [2, 3, 4, 5, 5, 5, 6, 6, 7, 12, 19]
-print(lengthOfLISBinarySearch([3, 5, 6, 2, 5, 4, 19, 5, 6, 7, 12]))
+# print(lengthOfLISBinarySearch([3, 5, 6, 2, 5, 4, 19, 5, 6, 7, 12]))
+# print(lengthOfLISBinarySearch([4, 10, 4, 3, 8, 9]))
