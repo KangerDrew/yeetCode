@@ -1,4 +1,7 @@
 # binary search practice:
+
+# 13
+# [10, 18, 101]
 def bs(arr, target):
     left = 0
     right = len(arr) - 1
@@ -14,6 +17,19 @@ def bs(arr, target):
             right = mid
 
     return left
+
+# Attempting to write a binary search algo that returns:
+def bsMin(arr, target):
+    # Everything same as previous BS algo
+    # up till the if else statement...
+    left = 0
+    right = len(arr) - 1
+
+    while left < right:
+        mid = left + (right - left) // 2
+        if arr[mid] == target:
+            return mid
+
 
 
 arr1 = sorted([0, 1, 0, 3, 2, 3])
