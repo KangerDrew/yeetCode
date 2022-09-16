@@ -21,11 +21,26 @@ def longestPalindromeCenter(s):
         left, right = i, i
 
         while left >= 0 and right < len(s) and s[left] == s[right]:
+            if (right - left) + 1 > str_len:
+                # Remember, the right boundary is non-inclusive so we
+                # need to get string from left, to "right + 1"
+                max_pal = s[left:(right + 1)]
+                str_len = right - left + 1
+
             left -= 1
             right += 1
 
-        if (right - left) + 1 > str_len:
-            # Remember, the right boundary is non-inclusive so we
-            # need to get string from left, to "right + 1"
-            max_pal = s[left:(right + 1)]
+        # Even length palindrome check:
+        # Same as before, except we increment right pointer by 1!
+        left, right = i, i + 1
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            if (right - left) + 1 > str_len:
+                max_pal = s[left:(right + 1)]
+                str_len = right - left + 1
+            left -= 1
+            right += 1
 
+    return max_pal
+
+
+print(longestPalindromeCenter("ccd"))
