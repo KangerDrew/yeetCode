@@ -116,3 +116,10 @@ def lengthOfLISBinarySearch(nums):
 # [2, 3, 4, 5, 5, 5, 6, 6, 7, 12, 19]
 # print(lengthOfLISBinarySearch([3, 5, 6, 2, 5, 4, 19, 5, 6, 7, 12]))
 # print(lengthOfLISBinarySearch([4, 10, 4, 3, 8, 9]))
+
+
+# The dynamic programming approach for this problem uses memoization where
+# we keep track of the largest possible length of the subsequence, from 0
+# to a given index.
+
+def lengthOfLISDynamicProgramming(nums):
