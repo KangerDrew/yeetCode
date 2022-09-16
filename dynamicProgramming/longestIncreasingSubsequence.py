@@ -67,6 +67,9 @@ def lengthOfLIS(nums):
 # print(lengthOfLIS([1, 2, 3]))
 
 
+# See solution 2 discussions for more details:
+# https://leetcode.com/problems/longest-increasing-subsequence/discuss/1326308/C%2B%2BPython-DP-Binary-Search-BIT-Solutions-Picture-explain-O(NlogN)
+
 def lengthOfLISBinarySearch(nums):
     def binarySearch(arr, target):
         left = 0
