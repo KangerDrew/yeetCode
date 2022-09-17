@@ -136,5 +136,18 @@ def lengthOfLISDynamic(nums):
         # Now, we need to check every value prior to the current index:
         for j in range(0, i):
             # First check if the value at index j is less than current
-            # index value at i. If so, that means...
+            # index value at i. If so, that means we can build LIS using
+            # values at j and i.
+            if nums[j] < nums[i]:
+                # If true, we need to update the memo value at index i.
+                # it'll either be memo[j] + 1, or just the memo[i] itself.
+
+                # memo[j] + 1 is if we can build upon the previous LIS length
+                # from index j.
+                # memo[i] is if it is better to keep the current LIS length value.
+                memo[i] = max(memo[j] + 1, memo[i])
+
+    # Once we finish iterating, return the value at the end of memoization array,
+    # which will give us the LIS length from index 0 to the end:
+    return memo[-1]
 
