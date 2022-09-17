@@ -147,7 +147,6 @@ def lengthOfLISDynamic(nums):
                 # memo[i] is if it is better to keep the current LIS length value.
                 memo[i] = max(memo[j] + 1, memo[i])
 
-    # Once we finish iterating, return the value at the end of memoization array,
-    # which will give us the LIS length from index 0 to the end:
-    return memo[-1]
+    # Once we finish iterating, return the LARGEST VALUE in the memoization:
+    return max(memo)
 
