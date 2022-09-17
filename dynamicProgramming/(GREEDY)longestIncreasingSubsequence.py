@@ -122,4 +122,19 @@ def lengthOfLISBinarySearch(nums):
 # we keep track of the largest possible length of the subsequence, from 0
 # to a given index.
 
-######## START HERE
+def lengthOfLISDynamic(nums):
+    # Initialize a memoization table, which will keep track
+    # of the LIS length, from 0 to that index.
+    memo = [1 for k in range(len(nums))]
+
+    # Begin the loop from index 1 of the memo array. We don't
+    # need to worry about index 0, because LIS length when length
+    # is 1 (index 0) will always be just 1:
+
+    for i in range(1, len(nums)):
+
+        # Now, we need to check every value prior to the current index:
+        for j in range(0, i):
+            # First check if the value at index j is less than current
+            # index value at i. If so, that means...
+
