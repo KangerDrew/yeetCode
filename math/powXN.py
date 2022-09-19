@@ -18,7 +18,7 @@ def powSlow(x, n):
     return sol if n > 0 else 1 / sol
 
 
-print(powSlow(3, 2))
+# print(powSlow(3, 2))
 
 # The above solution will run at O(n) time complexity. We can improve
 # this to O(log(n)), by cutting our workload in half. To do this, we
@@ -53,3 +53,5 @@ def pow(x, n):
     # return solution, but return the inverse if the n was negative:
     return res if n > 0 else 1 / res
 
+
+print(pow(2, 10))
