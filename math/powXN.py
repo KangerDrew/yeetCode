@@ -5,12 +5,13 @@
 def powSlow(x, n):
 
     sol = 1
+    power = abs(n)
 
-    while n > 0:
+    while power > 0:
         sol *= x
-        n -= 1
+        power -= 1
 
-    return sol
+    return sol if n > 0 else 1 / sol
 
 
-print(powSlow(3,2))
+print(powSlow(3, 2))
