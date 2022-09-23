@@ -1,3 +1,4 @@
+
 def canJumpSlow(nums):
 
     nums_length = len(nums)
