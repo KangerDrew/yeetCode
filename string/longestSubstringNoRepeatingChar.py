@@ -30,19 +30,36 @@ print(trashNoRepeatingChar("au"))
 
 
 # sliding window technique:
+
+# Instead of testing out every possible substring, we use two pointers,
+# and incrementing the right O(n) times. We can use a set to keep track
+# of which letter has been traversed. If we do run across the letter
+# we've seen before, we remove the letter and increment the left pointer
+# till our set is filled with unique letters:
+
 def noRepeatingChar(s):
 
+    # Initialize set to keep track of letters:
     contained_char = set()
     left = 0
     max_len = 0
 
+    # Increment right pointer:
     for right in range(len(s)):
 
+        # If the letter at the right pointer is in the
+        # contained_char, we increment the left pointer
+        # until we only have unique letters:
         while s[right] in contained_char:
             contained_char.remove(s[left])
             left += 1
 
+        # Add the letter at the right pointer to the set:
         contained_char.add(s[right])
+        # Calculate the max length. Important that we do this
+        # at each iteration as we can't guarantee that the final
+        # positions of the pointers give us the max length. It
+        # could occur in the middle of the iteration:
         max_len = max(max_len, right + 1 - left)
 
     return max_len
