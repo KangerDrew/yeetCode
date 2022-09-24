@@ -70,4 +70,19 @@ def noRepeatingChar(s):
 # letter, and instead of using while loop to increment the left
 # pointer, we can immediately jump to the correct position:
 
+def noRepeatingCharOpt(s):
 
+    max_len = 0
+    # use dictionary instead of set:
+    contained_char = {}
+    left = 0
+
+    for right in range(len(s)):
+
+        if s[right] in contained_char:
+            left = max(contained_char[right] + 1, left)
+
+        contained_char[s[right]] = right
+        max_len = max(max_len, right + 1 - left)
+
+    return max_len
