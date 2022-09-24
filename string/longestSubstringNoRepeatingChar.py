@@ -26,7 +26,7 @@ def trashNoRepeatingChar(s):
     return res
 
 
-print(trashNoRepeatingChar("au"))
+# print(trashNoRepeatingChar("au"))
 
 
 # sliding window technique:
@@ -88,4 +88,5 @@ def noRepeatingCharOpt(s):
     return max_len
 
 
-print(noRepeatingCharOpt("abcabcbb"))
+print(noRepeatingCharOpt("abba"))
+print(noRepeatingCharOpt("tmmzuxt"))
