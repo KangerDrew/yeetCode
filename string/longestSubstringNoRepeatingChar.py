@@ -79,10 +79,23 @@ def noRepeatingCharOpt(s):
 
     for right in range(len(s)):
 
+        # Check if the current letter is in the contained_char:
         if s[right] in contained_char:
+            # There are two possible scenarios:
+
+            # 1 - We need to "remove" the character, by updating our left
+            # pointer ahead of the last known location of the letter. This
+            # is when we take contained_char[s[right]] + 1
+
+            # 2 - We actually don't need to remove the character, because
+            # the left pointer has been incremented ahead of the last known
+            # location of the character already. This is when we just take
+            # left, instead of contained_char[s[right]] + 1
             left = max(contained_char[s[right]] + 1, left)
 
+        # Store the most recent known location of the current character:
         contained_char[s[right]] = right
+        # Determine the current length, and compare against max_len:
         max_len = max(max_len, right + 1 - left)
 
     return max_len
