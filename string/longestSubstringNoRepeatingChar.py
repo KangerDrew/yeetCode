@@ -64,3 +64,10 @@ def noRepeatingChar(s):
 
     return max_len
 
+
+# We can optimize the process above using hashmap (dictionary)
+# instead of hashset. Use dictionary to store the index of the
+# letter, and instead of using while loop to increment the left
+# pointer, we can immediately jump to the correct position:
+
+
