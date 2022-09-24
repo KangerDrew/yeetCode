@@ -80,7 +80,7 @@ def noRepeatingCharOpt(s):
     for right in range(len(s)):
 
         if s[right] in contained_char:
-            left = max(contained_char[right] + 1, left)
+            left = max(contained_char[s[right]] + 1, left)
 
         contained_char[s[right]] = right
         max_len = max(max_len, right + 1 - left)
