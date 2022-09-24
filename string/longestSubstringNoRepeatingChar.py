@@ -86,3 +86,6 @@ def noRepeatingCharOpt(s):
         max_len = max(max_len, right + 1 - left)
 
     return max_len
+
+
+print(noRepeatingCharOpt("abcabcbb"))
