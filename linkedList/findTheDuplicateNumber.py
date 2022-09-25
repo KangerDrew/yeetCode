@@ -43,8 +43,7 @@ def findTheDupeNumSet(nums):
 # This solution runs at O(n) time complexity, with O(1) space complexity:
 def findTheDupeNumLL(nums):
 
-
-# Start two pointers at index 0
+    # Start two pointers at index 0
     slow, fast = 0, 0
 
     # Increment slow pointer by 1, fast
