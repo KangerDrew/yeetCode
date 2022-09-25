@@ -22,3 +22,20 @@
 # algorithms would take O( log n ) space (quick sort), or in python's case,
 # it would take O(n) space complexity in worst-case scenario
 
+
+# Approach 3: Use set to track
+def findTheDupeNum(nums):
+    # No return statement outside for loop required, because
+    # of the constraints
+    checked = set()
+    for n in nums:
+        if n in checked:
+            return n
+        checked.add(n)
+
+# Best Approach: Treat it like a linked list problem
+# If we treat the index of the array element as a node, and the value of the
+# array as the pointer to "the next node", we can simulate a linked list
+# behavior. looking back at all the conditions for the problem, the linked
+# list that we'll get will always have a cycle (see videos & examples for
+# further illustrations...
