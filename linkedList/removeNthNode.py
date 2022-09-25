@@ -46,7 +46,7 @@
 
 # Increment one of the pointers by n, then start incrementing both
 # pointer until the one ahead reaches the end. THEN remove the node!
-def removeNthNodeBetter(head, n):
+def removeNthNodeOnePass(head, n):
 
     p1, p2 = head, head
 
