@@ -24,7 +24,7 @@
 
 
 # Approach 3: Use set to track
-def findTheDupeNum(nums):
+def findTheDupeNumSet(nums):
     # No return statement outside for loop required, because
     # of the constraints
     checked = set()
@@ -39,3 +39,31 @@ def findTheDupeNum(nums):
 # behavior. looking back at all the conditions for the problem, the linked
 # list that we'll get will always have a cycle (see videos & examples for
 # further illustrations...
+def findTheDupeNumLL(nums):
+
+
+# Start two pointers at index 0
+    slow, fast = 0, 0
+
+    # Increment slow pointer by 1, fast
+    # pointer by 2
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+
+        # If pointers intersect, break out:
+        if slow == fast:
+            break
+
+    # Using floyd-warshall algorithm, if we move one of the
+    # pointer back to the starting point and increment each
+    # pointer one step at a time, they will always collide
+    # at where the loop starts!
+
+    fast = 0
+    while slow != fast:
+        slow = nums[slow]
+        fast = nums[fast]
+
+    # Return the intersection value:
+    return slow
