@@ -61,16 +61,27 @@ def productExceptSelfPrePost(nums):
 
 # There is a far more efficient way to do the above solution:
 def productExceptSelfFaster(nums):
-    answer = [1]
 
-    for i in range(1, len(nums)):
-        answer.append(nums[i - 1] * answer[i - 1])
+    # Initialize an answer array, populated by 1 for now:
+    answer = [1 for i in range(len(nums))]
 
+    # Initialize a variable to keep track of prefix value:
+    prefix = 1
+    # Loop through to determine the prefix value that needs
+    # to be multiplied at index i:
+    for i in range(len(nums)):
+        answer[i] = prefix
+        prefix *= nums[i]
+
+    # Initialize postfix variable:
     post = 1
-    for j in range(len(nums) - 1, -1, -1):
-        answer[j] *= post
-        post *= nums[j]
+    # Loop backwards from the end to determine the postfix
+    # value that needs to be multiplied:
+    for i in range(len(nums) - 1, -1, -1):
+        answer[i] *= post
+        post *= nums[i]
 
+    # Return answer array:
     return answer
 
 
