@@ -44,11 +44,22 @@ def productExceptSelfPrePost(nums):
     for j in range(l - 2, -1, -1):
         post.insert(0, nums[j] * post[0])
 
-    print("pre array")
-    print(pre)
-    print("post array")
-    print(post)
+    # First value of the returning array would just be
+    # the second element of the postfix array:
+    sol = [post[1]]
 
+    # loop from index 1 to len - 2:
+    for k in range(1, l - 1):
+        sol.append(pre[k - 1] * post[k + 1])
+
+    # Last value of the returning array is just the
+    # second last element of the prefix array:
+    sol.append(pre[-2])
+
+    return sol
+
+
+# There is a far more efficient way to do the above solution:
 def productExceptSelfFaster(nums):
     answer = [1]
 
