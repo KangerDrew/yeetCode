@@ -25,8 +25,29 @@ def productExceptSelf(nums):
 # Postfix:  [4*3*2*1, 4*3*2, 4*3, 4]
 #            <======================
 
-# For a given index i, if we want to get the
+# For a given index i, if the product except self at i in nums is:
+# prefix[i - 1] * postfix[i + 1]
 
+# If prefix/postfix is out of bounds (i.e. at index 0 or at the end
+# of the list), we take 1 as our out of bounds prefix/postfix value
+# and multiply by our non-out of bounds prefix/postfix.
+
+def productExceptSelfPrePost(nums):
+
+    l = len(nums)
+    pre = [nums[0]]
+    post = [nums[-1]]
+
+    for i in range(1, l):
+        pre.append(pre[i - 1] * nums[i])
+
+    for j in range(l - 2, -1, -1):
+        post.insert(0, nums[j] * post[0])
+
+    print("pre array")
+    print(pre)
+    print("post array")
+    print(post)
 
 def productExceptSelfFaster(nums):
     answer = [1]
@@ -44,3 +65,4 @@ def productExceptSelfFaster(nums):
 
 # print(productExceptSelf([1, 2, 3, 4]))
 print(productExceptSelfFaster([1, 2, 3, 4]))
+print(productExceptSelfPrePost([1, 2, 3, 4]))
