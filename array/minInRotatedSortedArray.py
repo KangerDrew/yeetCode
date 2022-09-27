@@ -21,9 +21,13 @@ def findMin(nums):
         # Compare the recorded min value against value at midpoint:
         res = min(res, midVal)
 
-        # Two possible scenario:
+        # If the mid value is greater than left value, that means the
+        # inflection point (the lowest value in the rotated sorted arr)
+        # is located on the right side of the array. Thus we need to
+        # analyze the right side of the array:
         if midVal >= leftVal:
             left = middle + 1
+        # Otherwise, we check the left side of the array for minimum val:
         else:
             right = middle - 1
 
