@@ -5,9 +5,9 @@ def canJumpSlow(nums):
     jump_check = [False for i in range(nums_length)]
     jump_check[0] = True
 
-    # Time complexity is O(n^m) where n is the len of nums list,
+    # Time complexity is O(n*m) where n is the len of nums list,
     # and m is the largest possible value of an element in nums...
-    # VERY BAD!
+    # It's not bad, but it can be better...
     for index in range(nums_length):
 
         if jump_check[index]:
