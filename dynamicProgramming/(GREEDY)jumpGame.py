@@ -1,6 +1,4 @@
-
 def canJumpSlow(nums):
-
     nums_length = len(nums)
     jump_check = [False for i in range(nums_length)]
     jump_check[0] = True
@@ -24,8 +22,9 @@ def canJumpSlow(nums):
     return jump_check[-1]
 
 
-print(canJumpSlow([2, 3, 1, 1, 4]))
-print(canJumpSlow([3, 2, 1, 0, 4]))
+# print(canJumpSlow([2, 3, 1, 1, 4]))
+# print(canJumpSlow([3, 2, 1, 0, 4]))
+# print(canJumpSlow([2, 5, 0, 0]))
 
 
 # Instead of a traditional dynamic programming approach,
@@ -40,8 +39,8 @@ def canJumpGreedy(nums):
     return edge == len(nums) - 1
 
 
-print(canJumpGreedy([2, 3, 1, 1, 4]))
-print(canJumpGreedy([3, 2, 1, 0, 4]))
+# print(canJumpGreedy([2, 3, 1, 1, 4]))
+# print(canJumpGreedy([3, 2, 1, 0, 4]))
 
 
 def canJumpGreedyAlt(nums):
