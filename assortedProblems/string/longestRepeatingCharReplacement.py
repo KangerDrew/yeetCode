@@ -48,6 +48,10 @@ def charReplacementFast(s, k):
         # the left index one by one until we are able to produce a "longest substring
         # that is valid after replacing k characters":
         while (right + 1 - left - most_common_letter_count) > k:
+            # IMPORTANT: Note how we are not decrementing the most_common_letter_count.
+            # This is the longest_sub value will never be affected by the reduction of
+            # m_c_l_c. The only time we need to update the longest_sub is when the
+            # window increase AND the m_c_l_c also increases!
             letters[s[left]] -= 1
             left += 1
 
