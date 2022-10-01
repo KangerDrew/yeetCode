@@ -27,3 +27,29 @@ def happyNum(n):
     return False
 
 
+# Same, but slightly modified approach:
+def happyNumAlt(n):
+
+    def sumOfSquares(val):
+        output = 0
+
+        while val:
+            digit = val % 10
+            output += digit ** 2
+            val = val // 10
+
+        return output
+
+    checked = set()
+
+    while n not in checked:
+        checked.add(n)
+        n = sumOfSquares(n)
+
+        if n == 1:
+            return True
+
+    return False
+
+
+# Additional Side Note: this problem can be solved using linked list cycle approach!
