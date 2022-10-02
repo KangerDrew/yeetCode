@@ -19,3 +19,32 @@
 #
 #         for r in range(len(grid)):
 
+
+# Simple "DFS" traversal solution:
+
+def whereBallFallDFS(grid):
+
+    def dfs(row, col):
+        # Base case where ball reached the bottom:
+        if row == len(grid):
+            return col
+
+        # nextCol is the column position that ball should end up given
+        # the current slant orientation:
+        nextCol = col + grid[row][col]
+
+        # 1 - If the column is out of bounds, ball will be stuck.
+        # 2 - If the slant at [row][nextCol] does not match, the ball will get stuck.
+        if not (0 <= nextCol < len(grid[0])) or grid[row][col] != grid[row][nextCol]:
+            return -1
+
+        # If the ball didn't get stuck, proceed downwards:
+        return dfs(row + 1, nextCol)
+
+    res = []
+
+    for i in range(len(grid[0])):
+        res.append(dfs(0, i))
+
+    return res
+
