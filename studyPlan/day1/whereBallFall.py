@@ -53,3 +53,6 @@ def whereBallFallDFS(grid):
 
 # Iterative solution, better than dfs approach since space complexity is
 # going to be O(1) because there's no recursion stack:
+def whereBallFallIter(grid):
+
+    return "stuff"
