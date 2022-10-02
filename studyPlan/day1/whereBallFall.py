@@ -21,7 +21,9 @@
 
 
 # Simple "DFS" traversal solution:
-
+# m = row; n = column;
+# Time Complexity - O(m * n)
+# Space Complexity - O(m), since we enter at most m recursive stack
 def whereBallFallDFS(grid):
 
     def dfs(row, col):
@@ -48,3 +50,6 @@ def whereBallFallDFS(grid):
 
     return res
 
+
+# Iterative solution, better than dfs approach since space complexity is
+# going to be O(1) because there's no recursion stack:
