@@ -54,3 +54,5 @@ def addStringsImproved(num1, num2):
 
     return ''.join(str(x) for x in res[::-1])
 
+
+print(addStringsImproved("0", "0"))
