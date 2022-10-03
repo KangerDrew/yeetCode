@@ -22,3 +22,6 @@ def multiplyStrings(num1, num2):
 
     res = [str(j) for j in res[beg:]]
     return "".join(res)
+
+
+print(multiplyStrings("999", "999"))
