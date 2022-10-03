@@ -29,3 +29,28 @@ def addStrings(num1, num2):
 
     res = [str(j) for j in res]
     return "".join(res[beg:])
+
+
+# There was another solution, one where it didn't require reversing the
+# inputs more than once and we didn't have to cast individual digits to
+# integer (instead used ascii value comparison to get the digit value)
+def addStringsImproved(num1, num2):
+    res = []
+
+    carry = 0
+    p1 = len(num1) - 1
+    p2 = len(num2) - 1
+    while p1 >= 0 or p2 >= 0:
+        x1 = ord(num1[p1]) - ord('0') if p1 >= 0 else 0
+        x2 = ord(num2[p2]) - ord('0') if p2 >= 0 else 0
+        value = (x1 + x2 + carry) % 10
+        carry = (x1 + x2 + carry) // 10
+        res.append(value)
+        p1 -= 1
+        p2 -= 1
+
+    if carry:
+        res.append(carry)
+
+    return ''.join(str(x) for x in res[::-1])
+
