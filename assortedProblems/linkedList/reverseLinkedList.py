@@ -52,3 +52,18 @@ def reverseCORRECTED(head):
         current = after
         # Move after pointer to the node after that:
         after = after.next
+
+
+# Shorter cleaner solution than the previous one:
+def reverseShorter(head):
+    prev = None
+
+    while head:
+        after = head.next
+        head.next = prev
+        prev = head
+        head = after
+
+    return prev
+
+
