@@ -54,8 +54,9 @@ def removeNthFromEnd(head, n):
 # Increment one of the pointers by n, then start incrementing both
 # pointer until the one ahead reaches the end. THEN remove the node!
 
-# THIS SOLUTION IS WRONG! THIS WILL CAUSE PROBLEM WHEN ATTEMPTING TO
+# THE SOLUTION BELOW IS WRONG! THIS WILL CAUSE PROBLEM WHEN ATTEMPTING TO
 # REMOVE THE VERY LAST NODE:
+
 # def removeNthNodeOnePassWRONG(head, n):
 #
 #     p1, p2 = head, head
@@ -78,5 +79,32 @@ def removeNthFromEnd(head, n):
 
 
 def removeNthNodeOnePass(head, n):
-    # To avoid problem we had with previous problem, we need to implement
+    # To avoid problem we had with previous problem, we need to implement a dummy node
+    # before the head node. From very first solution (non-single pass), we observed how
+    # we had to find the node BEFORE the one we needed to remove:
     dummy = ListNode(0, head)
+
+    # Define two pointers:
+    # behind - used to get the node right before the removing one
+    # ahead - used to increment n times ahead, then increment together with "behind"
+    # pointer to determine where to remove the node:
+    behind = dummy
+    ahead = head
+
+    # Increment ahead pointer by n times:
+    while n > 0:
+        ahead = ahead.next
+        n -= 1
+
+    # Increment both pointers until ahead pointer reaches the end:
+    while ahead:
+        behind = behind.next
+        ahead = ahead.next
+
+    # Behind pointer is now positioned right before the one that needs removal.
+    # Remove the "next" pointer:
+    behind.next = behind.next.next
+
+    # We can't just remove "head" since it might have been removed. Instead,
+    # return dummy.next:
+    return dummy.next
