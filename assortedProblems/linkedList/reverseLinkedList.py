@@ -67,3 +67,23 @@ def reverseShorter(head):
     return prev
 
 
+# Recursive solution:
+def reverseRecursive(head):
+    if not head:
+        return head
+
+
+    def recursive(node):
+        if not node.next:
+            return node
+
+        rev = recursive(node.next)
+
+        # Set the .next of the node after back to the input,
+        # creating a mini loop:
+        node.next.next = node
+        # Set the next pointer of the input to be None.
+        node.next = None
+        return rev
+
+    return recursive(head)
