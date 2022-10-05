@@ -27,7 +27,7 @@ def canJumpSlow(nums):
 # print(canJumpSlow([2, 5, 0, 0]))
 
 
-# Found another "dynamic programming solution" from web:
+# Found an actual "dynamic programming solution" from web:
 def jumpGameDyn(nums):
     dp = [False] * len(nums)
     dp[0] = True
