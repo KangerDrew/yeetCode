@@ -27,6 +27,27 @@ def canJumpSlow(nums):
 # print(canJumpSlow([2, 5, 0, 0]))
 
 
+# Found another "dynamic programming solution" from web:
+def jumpGameDyn(nums):
+    dp = [False] * len(nums)
+    dp[0] = True
+    for i in range(1, len(nums)):
+
+        max_step = min(i - 1, len(nums) - 1)
+
+        for j in range(max_step, -1, -1):
+
+            if nums[j] >= i - j and dp[j] is True:
+                dp[i] = True
+                break
+
+    return dp[-1]
+
+
+# print(False is None)
+print(jumpGameDyn([2, 3, 1, 1, 4]))
+
+
 # Instead of a traditional dynamic programming approach,
 # we can use greedy approach to solve this problem:
 def canJumpGreedy(nums):
