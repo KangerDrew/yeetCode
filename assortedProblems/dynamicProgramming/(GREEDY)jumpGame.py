@@ -34,9 +34,7 @@ def jumpGameDyn(nums):
     dp[0] = True
     for i in range(1, len(nums)):
 
-        max_step = min(i - 1, len(nums) - 1)
-
-        for j in range(max_step, -1, -1):
+        for j in range(min(i - 1, len(nums) - 1), -1, -1):
 
             if nums[j] >= i - j and dp[j] is True:
                 dp[i] = True
