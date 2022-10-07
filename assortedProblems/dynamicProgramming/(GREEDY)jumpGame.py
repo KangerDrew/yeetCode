@@ -47,6 +47,39 @@ def jumpGameDyn(nums):
 print(jumpGameDyn([2, 3, 1, 1, 4]))
 
 
+# My interpretation of dynamic programming approach - O(n^2) time w O(n) memory:
+def jumpGameDynII(nums):
+    array_len = len(nums)
+
+    # memo array will tell us which index position is "reachable".
+    # Set the default values to False, as we will mark them as True/False
+    # when we know for certain if they can reach the last index or not.
+    memo = [False for stuff in range(array_len)]
+    # Set the LAST value of this array to be reachable. This is simply
+    # because last index is the target itself:
+    memo[-1] = True
+
+    # From here, we loop from the SECOND LAST INDEX of the nums array.
+    # We will utilize the memo array by checking to see if any of the
+    # indices ahead of the current ones are able to reach the last index.
+    # If yes, that means we can break out of the loop early and proceed
+    # to checking the next furthest index from the final position:
+
+    for i in range(len(nums) - 2, -1, -1):
+
+        largest_jump = min(array_len - i, nums[i] + 1)
+        for jumpVal in range(1, largest_jump):
+
+            if memo[i + jumpVal]:
+                memo[i] = True
+                break
+
+    return memo[0]
+
+
+# print(jumpGameDynII([3, 2, 1, 0, 4]))
+
+
 # Instead of a traditional dynamic programming approach,
 # we can use greedy approach to solve this problem:
 def canJumpGreedy(nums):
