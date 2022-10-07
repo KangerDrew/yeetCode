@@ -28,25 +28,6 @@
 # print(canJumpSlow([2, 5, 0, 0]))
 
 
-# Found an actual "dynamic programming solution" from web:
-def jumpGameDyn(nums):
-    dp = [False] * len(nums)
-    dp[0] = True
-    for i in range(1, len(nums)):
-
-        for j in range(min(i - 1, len(nums) - 1), -1, -1):
-
-            if nums[j] >= i - j and dp[j] is True:
-                dp[i] = True
-                break
-
-    return dp[-1]
-
-
-# print(False is None)
-print(jumpGameDyn([2, 3, 1, 1, 4]))
-
-
 # My interpretation of dynamic programming approach - O(n^2) time w O(n) memory:
 def jumpGameDynII(nums):
     array_len = len(nums)
@@ -67,13 +48,23 @@ def jumpGameDynII(nums):
 
     for i in range(len(nums) - 2, -1, -1):
 
+        # Calculate the largest jump we can make from current i. This is
+        # going to be either:
+        # 1) Max array length minus the current index: array_len - i
+        # 2) Value in the nums[i] itself - nums[i] + 1  (+1 because 2nd input
+        # of the range is exclusive)...
         largest_jump = min(array_len - i, nums[i] + 1)
         for jumpVal in range(1, largest_jump):
 
+            # If any of the memo value returns True, that means we should be
+            # able to reach the last index from the current index. Set memo[i]
+            # to be true and stop searching for other possibilities:
             if memo[i + jumpVal]:
                 memo[i] = True
                 break
 
+    # Return memo[0] to see if last index is reachable from starting position
+    # at 0th index:
     return memo[0]
 
 
