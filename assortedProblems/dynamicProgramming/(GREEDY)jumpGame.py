@@ -70,28 +70,32 @@ def jumpGameDynII(nums):
 
 # print(jumpGameDynII([3, 2, 1, 0, 4]))
 
+# The above dynamic programming approach can be simplified to a greedy approach,
+# where instead of using an entire array to check "which index could successfully
+# reach the end", we can simplify it to "keep track of the last known closest
+# position from the beginning, that COULD reach the end" - call this value "goal".
 
-# Instead of a traditional dynamic programming approach,
-# we can use greedy approach to solve this problem:
-def canJumpGreedy(nums):
-    edge = 0
+# Then, in for loop, we loop backwards from the end (like we did in dynamic
+# programming approach), starting from the 2nd last element. However, this time
+# we'll see if the step at a given index i (i + nums[i]) can reach or exceed the
+# most recent "goal". If yes, that means index i can reach the end too. So we update
+# the goal value at each iteration, and at the end to see if the goal value has been
+# updated to 0...
 
-    for i, num in enumerate(reversed(nums)):
-        if i - num <= edge:
-            edge = i
-
-    return edge == len(nums) - 1
-
-
-# print(canJumpGreedy([2, 3, 1, 1, 4]))
-# print(canJumpGreedy([3, 2, 1, 0, 4]))
-
-
+# Speed - O(n)
+# Memory - O(1)
 def canJumpGreedyAlt(nums):
+
+    # Set the goal value as length of array - 1.
     goal = len(nums) - 1
 
-    for i in range(len(nums) - 1, -1, -1):
+    # Iterate backwards, starting from the 2nd last index of the array:
+    for i in range(len(nums) - 2, -1, -1):
+        # Check if from index, i whether we are able to reach the goal
+        # or not. If so, it means index i can reach the end. Update goal:
         if i + nums[i] >= goal:
             goal = i
 
+    # After the loop, if the goal value is 0, it means we should be able to
+    # jump from beginning to the end!
     return goal == 0
