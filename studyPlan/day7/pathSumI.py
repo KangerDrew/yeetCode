@@ -12,4 +12,3 @@ def pathSum(root, targetSum):
         return dfs(node.left, currentSum) or dfs(node.right, currentSum)
 
     return dfs(root, 0)
-
