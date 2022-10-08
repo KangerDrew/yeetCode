@@ -1,3 +1,5 @@
+import collections
+
 # Seemingly straight forward, but we must be careful to consider
 # ALL the edge cases!
 
@@ -17,8 +19,8 @@
 # going to do linear scan, if we run into identical word more than once
 # in a row. Using HashMap will allow us to keep track of same words, as
 # we CANT do that with HashSet!!!
-import collections
 
+# O(n) time complexity, with O(n) memory:
 
 def longestPalindrome(words):
 
@@ -69,6 +71,9 @@ def longestPalindrome(words):
 # Found a really cool approach that uses grid instead of HashMap to store
 # the letters:
 
+# Slightly less memory efficient (O(26*26)), but similar runtime O(n).
+
+# ***Ideally use the first solution, as it is faster and easier to understand!***
 def longestPalindromeGrid(words):
 
     # Create a 26 x 26 grid, where row represents first letter,
