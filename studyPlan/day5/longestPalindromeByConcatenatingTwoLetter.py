@@ -64,3 +64,41 @@ def longestPalindrome(words):
 
     # Return the final palindrome length:
     return res
+
+
+# Found a really cool approach that uses grid instead of HashMap to store
+# the letters:
+
+def longestPalindromeGrid(words):
+
+    # Create a 26 x 26 grid, where row represents first letter,
+    # and column represents the second letter of the word:
+    letter_count = [[0 for _ in range(26)] for _ in range(26)]
+    res = 0
+
+    for w in words:
+
+        # Use ascii comparison to get the index value of the letter:
+        l1, l2 = ord(w[0]) - ord('a'), ord(w[1]) - ord('a')
+
+        # Check if the reverse of the word is in the grid. If so, add
+        # 4 to the palindrome length and remove the reverse:
+        if letter_count[l2][l1] > 0:
+            res += 4
+            letter_count[l2][l1] -= 1
+        # If not, add the word to the grid:
+        else:
+            letter_count[l1][l2] += 1
+
+    # Now, loop through the grid to see if there are any words with
+    # identical letters remained unused:
+    for i in range(26):
+
+        # If yes, we add 2 to the palindrome length as it can be used
+        # as a center of the palindrome. Remember to break after!
+        if letter_count[i][i] > 0:
+            res += 2
+            break
+
+    # Return the palindrome length result:
+    return res
