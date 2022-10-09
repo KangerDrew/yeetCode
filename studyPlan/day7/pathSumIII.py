@@ -31,7 +31,7 @@ class TreeNode:
 
 
 def pathSumIII(root, targetSum):
-    count, k = 0, targetSum
+    count = 0
     h = collections.defaultdict(int)
 
     def preorder(node, curr_sum):
@@ -40,10 +40,10 @@ def pathSumIII(root, targetSum):
             return
         curr_sum += node.val
 
-        if curr_sum == k:
+        if curr_sum == targetSum:
             count += 1
 
-        count += h[curr_sum - k]
+        count += h[curr_sum - targetSum]
         h[curr_sum] += 1
 
         preorder(node.left, curr_sum)
@@ -70,3 +70,53 @@ head.right = TreeNode(-3)
 head.right.right = TreeNode(11)
 
 print(pathSumIII(head, 8))
+
+
+def pathSumIIIMod(root, targetSum):
+    h = collections.defaultdict(int)
+
+    def preorder(node, curr_sum, count):
+
+        if not node:
+            return count
+
+        curr_sum += node.val
+
+        count += h[curr_sum - targetSum]
+
+        h[curr_sum] += 1
+        count = preorder(node.left, curr_sum, count)
+        count = preorder(node.right, curr_sum, count)
+        h[curr_sum] -= 1
+
+        return count
+
+    return preorder(root, 0, 0)
+
+
+print(pathSumIIIMod(head, 8))
+
+
+def pathSumIIIdiff(root, targetSum):
+    h = collections.defaultdict(int)
+
+    def preorder(node, curr_sum):
+
+        if not node:
+            return 0
+
+        curr_sum += node.val
+
+        count = h[curr_sum - targetSum]
+
+        h[curr_sum] += 1
+        count += preorder(node.left, curr_sum)
+        count += preorder(node.right, curr_sum)
+        h[curr_sum] -= 1
+
+        return count
+
+    return preorder(root, 0)
+
+
+print(pathSumIIIdiff(head, 8))
