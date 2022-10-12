@@ -84,6 +84,9 @@ def pathSumIIIMod(root, targetSum):
 
         count += h[curr_sum - targetSum]
 
+        if curr_sum == targetSum:
+            count += 1
+
         h[curr_sum] += 1
         count = preorder(node.left, curr_sum, count)
         count = preorder(node.right, curr_sum, count)
@@ -109,6 +112,9 @@ def pathSumIIIdiff(root, targetSum):
 
         count = h[curr_sum - targetSum]
 
+        if curr_sum == targetSum:
+            count += 1
+
         h[curr_sum] += 1
         count += preorder(node.left, curr_sum)
         count += preorder(node.right, curr_sum)
@@ -119,4 +125,14 @@ def pathSumIIIdiff(root, targetSum):
     return preorder(root, 0)
 
 
-print(pathSumIIIdiff(head, 8))
+# print(pathSumIIIdiff(head, 8))
+
+# Another example from notes:
+newHead = TreeNode(0)
+newHead.left = TreeNode(0)
+newHead.left.left = TreeNode(0)
+newHead.left.left.left = TreeNode(8)
+newHead.left.left.left.left = TreeNode(-8)
+newHead.left.left.left.left.left = TreeNode(8)
+print(pathSumIIIdiff(newHead, 8))
+print(pathSumIIIMod(newHead, 8))
