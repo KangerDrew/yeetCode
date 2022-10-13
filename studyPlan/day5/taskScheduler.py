@@ -1,12 +1,53 @@
+import collections, heapq
+
 # One possible solution involves the use of max heap, to keep track of which
 # "task" (letter) has the highest count, and prioritizing the elimination of
 # those letters first, and maximize the amount we alter the tasks to reduce
 # the total amount of time spent.
 
-
 def taskSchedule(tasks, n):
-    if n == 0:
-        return len(tasks)
+
+    # First, convert the given tasks array into a dictionary that counts
+    # how many of the element (task/letter) is in the task list:
+
+    freq = collections.Counter(tasks)
+
+    # Convert the above freq dictionary into list of frequencies. We don't need
+    # to keep track of which frequency belongs to which one (will explain later)
+    # Multiply the values by negative, so we can emulate a max-heap behavior.
+    freq_heap = [-f for f in freq.values()]
+    # Convert the frequency array into heap.
+    heapq.heapify(freq_heap)
+
+    # Create a queue, where you will store "used tasks" and when that task will
+    # be ready to be re-added to the heap. The reason why we don't need to keep
+    # track of what the letters/tasks is, is because we only care when they are
+    # available to be used again...
+    cool_down_queue = collections.deque()
+    # Initialize a variable that keeps track of the time that elapsed:
+    time = 0
+
+    while cool_down_queue or freq_heap:
+
+        # Pop from the freq_heap, if it contains any elements. This will
+        # return us the negative frequency of currently most frequent task:
+        if freq_heap:
+            current_task_freq = heapq.heappop()
+            # Decrement the frequency of this task, add it onto the queue if
+            # the frequency is not 1, along with the time at which this
+            # task will be ready to be done again:
+            if current_task_freq < -1:
+                cool_down_queue.append((current_task_freq + 1, time + n))
+
+        # Check to see if queue contains any tasks, and remove the first one in
+        # queue if the cool_down time is past the current time:
+        if cool_down_queue and cool_down_queue[0][1] <= time:
+            heapq.heappush(cool_down_queue.popleft()[0])
+
+        # Increment time variable by 1:
+        time += 1
+
+    return time
 
 
 # If you can remember the solution below, it's great. Otherwise, max heap solution
@@ -60,7 +101,6 @@ def taskSchedule(tasks, n):
 # task, we can assume that in that case, just taking the length of the task array will
 # return us the shortest possible time it takes to complete all tasks, without any idle
 # time required!
-
 
 def taskScheduleMath(tasks, n):
     frequencies = [0] * 26
