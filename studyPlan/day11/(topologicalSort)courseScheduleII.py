@@ -7,7 +7,6 @@ def courseScheduleII(numCourses, prerequisites):
     for course in prerequisites:
         prereq[course[0]].append(course[1])
 
-
     schedule = []
     visit, cycle = set(), set()
 
