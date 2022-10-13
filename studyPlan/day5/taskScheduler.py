@@ -6,7 +6,6 @@ import collections, heapq
 # the total amount of time spent.
 
 def taskSchedule(tasks, n):
-
     # First, convert the given tasks array into a dictionary that counts
     # how many of the element (task/letter) is in the task list:
 
@@ -32,7 +31,7 @@ def taskSchedule(tasks, n):
         # Pop from the freq_heap, if it contains any elements. This will
         # return us the negative frequency of currently most frequent task:
         if freq_heap:
-            current_task_freq = heapq.heappop()
+            current_task_freq = heapq.heappop(freq_heap)
             # Decrement the frequency of this task, add it onto the queue if
             # the frequency is not 1, along with the time at which this
             # task will be ready to be done again:
@@ -42,7 +41,7 @@ def taskSchedule(tasks, n):
         # Check to see if queue contains any tasks, and remove the first one in
         # queue if the cool_down time is past the current time:
         if cool_down_queue and cool_down_queue[0][1] <= time:
-            heapq.heappush(cool_down_queue.popleft()[0])
+            heapq.heappush(freq_heap, cool_down_queue.popleft()[0])
 
         # Increment time variable by 1:
         time += 1
