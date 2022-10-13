@@ -5,6 +5,14 @@ import collections, heapq
 # those letters first, and maximize the amount we alter the tasks to reduce
 # the total amount of time spent.
 
+# The solution is technically O(n) * 2 * O(log 26) in time efficiency.
+# O(n) - comes from the tasks array
+# 2 * O(log 26) - comes from the min-heap operations. We're only expecting
+# size 26 at MOST, since there are 26 letters in the alphabet.
+
+# Technically, we can say this is O(n) time efficient solution if we count
+# the heap operations as constant!
+
 def taskSchedule(tasks, n):
     # First, convert the given tasks array into a dictionary that counts
     # how many of the element (task/letter) is in the task list:
