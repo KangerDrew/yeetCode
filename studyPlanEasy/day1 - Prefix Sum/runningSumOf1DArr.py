@@ -11,3 +11,19 @@ def runningSum(nums):
 
     return arr
 
+
+def runningSumAlt(nums):
+
+    arr = [nums[0]]
+    for i, n in enumerate(nums[1:]):
+        arr.append(arr[i] + n)
+
+    return arr
+
+
+def runningSumChangeInput(nums):
+
+    for i in range(1, len(nums)):
+        nums[i] = nums[i - 1] + nums[i]
+
+    return nums
