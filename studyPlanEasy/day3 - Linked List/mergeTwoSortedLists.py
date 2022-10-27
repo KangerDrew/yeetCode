@@ -40,9 +40,16 @@ def mergeListRecur(l1, l2):
         return l1
 
     # Once we determined both inputs were a LinkedList node, we compare their values.
+
+    # If l1 has a smaller value, we call mergeListRecur() using l1.next and l2.
+    # this will return the "sorted list using l1.next and l2", which should be set
+    # as a .next value of the l1.
     if l1.val < l2.val:
         l1.next = mergeListRecur(l1.next, l2)
+        # Then, we simply exit the recursion stack by returning l1, which should be the
+        # head of the newly sorted list, given the input l1 and l2!
         return l1
+    # Do the opposite if l2 is smaller...
     else:
         l2.next = mergeListRecur(l1, l2.next)
         return l2
