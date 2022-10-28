@@ -5,7 +5,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-def reverseLinkedListItr(head):
+def reverseItr(head):
     # Edge cases
     if not head or not head.next:
         return head
@@ -27,3 +27,20 @@ def reverseLinkedListItr(head):
     current.next = pre
 
     return current
+
+
+# One less line:
+def reverseItrImproved(head):
+    if not head or head.next:
+        return head
+
+    pre = None
+    current = head
+
+    while current:
+        post = current.next
+        current.next = pre
+        pre = current
+        current = post
+
+    return
