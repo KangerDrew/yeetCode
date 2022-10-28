@@ -6,7 +6,8 @@ class ListNode:
         self.next = next
 
 def reverseLinkedListItr(head):
-    if not head.next:
+    # Edge cases
+    if not head or not head.next:
         return head
 
     pre = None
@@ -14,11 +15,15 @@ def reverseLinkedListItr(head):
     post = head.next
 
     while post:
+        # Change direction
         current.next = pre
+
+        # Move pointers
         pre = current
         current = post
         post = post.next
 
+    # Change direction one last time!
     current.next = pre
 
     return current
