@@ -12,4 +12,20 @@ def listCycleII(head):
     # Initialize two pointers as stated above:
     p1, p2 = head.next, head.next.next
 
+    while p1 != p2:
 
+        # Check HERE whether we found no cycle or not:
+        if not p2 or p2.next:
+            return None
+
+        p1, p2 = p1.next, p2.next.next
+
+    # Once two pointers collide, move one of the pointers to the beginning.
+    p1 = head
+
+    # Increment both by until they collide at the beginning of cycle:
+    while p1 != p2:
+        p1, p2 = p1.next, p2.next
+
+    # Return the collision point:
+    return p1
