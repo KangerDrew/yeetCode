@@ -15,7 +15,7 @@ def listCycleII(head):
     while p1 != p2:
 
         # Check HERE whether we found no cycle or not:
-        if not p2 or p2.next:
+        if not p2 or not p2.next:
             return None
 
         p1, p2 = p1.next, p2.next.next
