@@ -35,10 +35,13 @@ def longestPalindrome(s):
 
 def longestPalindromeBetter(s):
     palindrome_len = 0
-    letter_count = collections.defaultdict(int)
+    # letter_count = collections.defaultdict(int)
+    #
+    # for letter in s:
+    #     letter_count[letter] += 1
 
-    for letter in s:
-        letter_count[letter] += 1
+    # Better way to do letter_count:
+    letter_count = collections.Counter(s)
 
     for letter in letter_count:
 
