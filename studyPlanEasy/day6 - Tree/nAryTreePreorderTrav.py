@@ -37,7 +37,7 @@ def preorder(root):
         current = stack.pop()
         res.append(current.val)
 
-        for n in current.children:
-            stack.append(n)
+        for i in range(len(current.children) - 1, -1, -1):
+            stack.append(current.children[i])
 
     return res
