@@ -37,6 +37,8 @@ def preorder(root):
         current = stack.pop()
         res.append(current.val)
 
+        # We push the right-most node first, so that as we remove node from stack
+        # on each while loop, we will be traversing the left-most node first!
         for i in range(len(current.children) - 1, -1, -1):
             stack.append(current.children[i])
 
