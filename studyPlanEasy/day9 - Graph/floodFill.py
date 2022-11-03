@@ -24,17 +24,24 @@ def floodFill(image, sr, sc, color):
     return image
 
 
-# Also solved it using BFS (faster in python because python sucks at recursion):
+# Also solved it using iterative BFS (faster in python because python sucks at recursion):
 def floodFillBFS(image, sr, sc, color):
+
     starting = image[sr][sc]
+
+    # Infinite loop prevention - if the color is exactly the same as the starting position,
+    # we don't need to go into bfs traversal to change all the colors in the image (nothing
+    # to change in the first place). We need to return back the original input, otherwise
+    # we'll end up with infinite loop!
+    if starting == color:
+        return image
+
     queue = collections.deque([(sr, sc)])
 
     while queue:
         r, c = queue.popleft()
 
-        if image[r][c] == color:
-            continue
-
+        # This if statement wouldn't have worked if color == starting:
         if image[r][c] == starting:
 
             image[r][c] = color
