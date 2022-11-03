@@ -5,10 +5,16 @@ def floodFill(image, sr, sc, color):
 
     starting = image[sr][sc]
 
-    def dfs(r, c):
-        if image[r][c] == color:
-            return None
+    # Infinite loop prevention - if the color is exactly the same as the starting position,
+    # we don't need to go into dfs traversal to change all the colors in the image (nothing
+    # to change in the first place). We need to return back the original input, otherwise
+    # we'll end up with stack overflow!!
+    if starting == color:
+        return image
 
+    def dfs(r, c):
+
+        # This if statement wouldn't work if starting == color:
         if image[r][c] == starting:
             image[r][c] = color
 
