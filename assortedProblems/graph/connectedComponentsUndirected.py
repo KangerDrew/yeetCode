@@ -44,7 +44,6 @@ def countComponentsDFS(n, edges):
 # The below function uses Union Find to determine the number of connected
 # components, in a constant time O(n)!
 def countComponentsUnion(n, edges):
-
     # We need "parents" array in order to keep track of which nodes
     # are grouped together. Initially, each node will be their own
     # parent. However as they are joined, a single node (parent) will
@@ -65,31 +64,29 @@ def countComponentsUnion(n, edges):
 
         # Otherwise, we must recursively track the
         # parent of the node:
-        parents[node] = parents[parents[node]]
-        return find(parents[node])
+        parents[node] = find(parents[node])
+        return parents[node]
 
     # union() function will combine two components into one, and
     # return 1 if union did occur. If no union can occur (i.e.
     # two nodes have the same parent), then we return 0:
     def union(node1, node2):
-        # Get the parents of node1 and node 2:
-        p1, p2 = find(node1), find(node2)
 
         # If the nodes have the same parent, they already belong to
         # the same component. Thus no union occurs, and we return 0:
-        if p1 == p2:
+        if node1 == node2:
             return 0
 
         # Check which parent node has a higher rank. The parent with
         # lower rank will take the larger ranking parent as its new parent!
         # Furthermore, we will increase the rank of the larger parent by
         # the rank of the smaller parent:
-        if rank[p2] > rank[p1]:
-            parents[p1] = p2
-            rank[p2] += rank[p1]
+        if rank[node2] > rank[node1]:
+            parents[node1] = node2
+            rank[node2] += rank[node1]
         else:
-            parents[p2] = p1
-            rank[p1] += rank[p2]
+            parents[node2] = node1
+            rank[node1] += rank[node2]
 
         # After union process is successful, we return 1, signifying that
         # there are now 1 less component!
@@ -103,7 +100,9 @@ def countComponentsUnion(n, edges):
     # If union does occur (i.e. New component is created), union() returns 1
     # and we decrement total_components count by 1 as such:
     for n1, n2 in edges:
-        total_components -= union(n1, n2)
+        # Get the parents of node1 and node 2:
+        p1, p2 = find(n1), find(n2)
+        total_components -= union(p1, p2)
 
     # Return total_components
     return total_components
