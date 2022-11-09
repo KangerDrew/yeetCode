@@ -30,12 +30,25 @@ def twoPassBullsAndCows(secret, guess):
     return "{}A{}B".format(x, y)
 
 
+# We make a one-pass solution, where we use a single dictionary.
+# As we loop through, the secret string will give positive contribution
+# to the count, while guess string will give negative contribution!
+
+# int(h[s] < 0) expression returns 1, if guess contains more s characters
+# than secret
+
+# int(h[g] > 0) expression returns 1, if secret contains more g characters
+# than guess
+
 def onePass(secret, guess):
     h = collections.defaultdict(int)
     bulls = cows = 0
 
-    for idx, s in enumerate(secret):
-        g = guess[idx]
+    for i in range(len(secret)):
+
+        s = secret[i]
+        g = guess[i]
+
         if s == g:
             bulls += 1
         else:
