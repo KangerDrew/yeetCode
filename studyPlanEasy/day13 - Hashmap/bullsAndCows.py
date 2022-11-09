@@ -40,6 +40,9 @@ def twoPassBullsAndCows(secret, guess):
 # int(h[g] > 0) expression returns 1, if secret contains more g characters
 # than guess
 
+# 1807
+# 7810
+
 def onePass(secret, guess):
     h = collections.defaultdict(int)
     bulls = cows = 0
@@ -57,3 +60,5 @@ def onePass(secret, guess):
             h[g] -= 1
 
     return "{}A{}B".format(bulls, cows)
+
+onePass('1807', '7810')
