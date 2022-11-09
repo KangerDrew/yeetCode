@@ -1,3 +1,4 @@
+import collections
 # paper and pencil game, where you guess the "secret" value and return how many
 # integers were guessed correctly AND in the same position (Bulls) and how many
 # were in the secret value but are not in correct position (Cows)
@@ -27,3 +28,19 @@ def twoPassBullsAndCows(secret, guess):
     # Therefore we are first updating x value
 
     return "{}A{}B".format(x, y)
+
+
+def onePass(secret, guess):
+    h = collections.defaultdict(int)
+    bulls = cows = 0
+
+    for idx, s in enumerate(secret):
+        g = guess[idx]
+        if s == g:
+            bulls += 1
+        else:
+            cows += int(h[s] < 0) + int(h[g] > 0)
+            h[s] += 1
+            h[g] -= 1
+
+    return "{}A{}B".format(bulls, cows)
