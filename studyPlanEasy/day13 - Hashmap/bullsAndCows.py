@@ -74,11 +74,28 @@ def onePassAlt(secret, guess):
     g_dic = collections.defaultdict(int)
     bulls = cows = 0
 
-    for idx, s in enumerate(secret):
-        g = guess[idx]
+    for i in range(len(secret)):
+
+        s = secret[i]
+        g = guess[i]
+
         if s == g:
             bulls += 1
         else:
+
+            # The objective here is to observe both the secret and the guess string
+            # simultaneously on each loop. When s and g do not match, we check both
+            # letters to see if either of them has occurred previously in the other
+            # string. If we discovered that we've already seen the particular letter
+            # in the OTHER string (important! if we're checking g, we need to see if
+            # it occurred in secret, NOT guess. And vice versa), we need to increment
+            # the cows count by 1. The cows count can be incremented by 2 on each
+            # loop, if both s and g were found previously in the opposite string...
+            # If we incremented it, we remove that letter from the opposite string's
+            # dictionary.
+
+            # If g or s was not found previously, simply add that letter to the dictionary
+            # normally (not to the opposite string)
 
             # Check if the letter g occurred previously in secret. If yes,
             # we add 1 to cow, and remove that g letter from s_dic:
