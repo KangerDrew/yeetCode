@@ -61,4 +61,39 @@ def onePass(secret, guess):
 
     return "{}A{}B".format(bulls, cows)
 
+
 onePass('1807', '7810')
+
+
+# I re-wrote the one-pass solution so it's easier to understand. Requires
+# more memory however...
+
+def onePassAlt(secret, guess):
+
+    s_dic = collections.defaultdict(int)
+    g_dic = collections.defaultdict(int)
+    bulls = cows = 0
+
+    for idx, s in enumerate(secret):
+        g = guess[idx]
+        if s == g:
+            bulls += 1
+        else:
+
+            # Check if the letter g occurred previously in secret. If yes,
+            # we add 1 to cow, and remove that g letter from s_dic:
+            if s_dic[g] > 0:
+                cows += 1
+                s_dic[g] -= 1
+            # If not, we add letter g to the g_dic instead:
+            else:
+                g_dic[g] += 1
+
+            # Do the same, except other way around!
+            if g_dic[s] > 0:
+                cows += 1
+                g_dic[s] -= 1
+            else:
+                s_dic[s] += 1
+
+    return "{}A{}B".format(bulls, cows)
