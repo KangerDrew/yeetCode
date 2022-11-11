@@ -11,7 +11,37 @@ def findAnagrams(s, p):
     if len(p) > len(s):
         return []
 
+    # Define an array that'll keep track of the indices where the substring
+    # is the anagram:
+    res = []
+
     # Define a dictionary that contains the number of letters in the p.
     # We can simply use Counter to do this:
-    p_dict = collections.Counter(p)
+    p_dic = collections.Counter(p)
 
+    # Define a dictionary that will keep track of the substring's letter
+    # count. We want our substring to be the same length as p:
+    sub_dic = collections.Counter()
+    for i in range(len(p)):
+        sub_dic[s[i]] += 1
+
+    if sub_dic == p_dic:
+        res.append(0)
+
+    for right in range(len(p), len(s)):
+        left_m1 = right - len(p)
+
+        sub_dic[s[right]] += 1
+        sub_dic[s[left_m1]] -= 1
+
+        if sub_dic[s[left_m1]] == 0:
+            sub_dic.pop(s[left_m1])
+
+        if sub_dic == p_dic:
+            res.append(left_m1 + 1)
+
+    return res
+
+
+# print(findAnagrams('cbaebabacd', 'abc'))
+print(findAnagrams('bb', 'aa'))
