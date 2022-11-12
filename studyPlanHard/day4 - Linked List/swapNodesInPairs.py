@@ -27,7 +27,8 @@ def swapPairsItr(head):
         current.next = next_curr
 
         # We also need to make it so that our pre node is pointing
-        # at the to_swap node:
+        # at the to_swap node, so that it is correctly referencing
+        # the "new head":
         pre.next = to_swap
 
         # Finally, set up so that the pre and next are referencing
