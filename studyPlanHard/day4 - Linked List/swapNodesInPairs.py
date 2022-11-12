@@ -44,4 +44,22 @@ def swapPairsItr(head):
     return dummy.next
 
 
+def swapPairsRec(head):
+
+    def helper(node):
+        # Exit condition - No nodes to swap:
+        if not node or not node.next:
+            return node
+
+        current = node
+        to_swap = current.next
+        after = helper(to_swap.next)
+
+        to_swap.next = current
+        current.next = after
+
+        return to_swap
+
+    return helper(head)
+
 
