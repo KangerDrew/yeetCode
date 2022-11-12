@@ -25,15 +25,20 @@ def findAnagrams(s, p):
     for i in range(len(p)):
         sub_dic[s[i]] += 1
 
+    # Check to see if the first len(p) letters of the input s is the anagram:
     if sub_dic == p_dic:
         res.append(0)
 
+    # Use for loop to add & remove letters from the sub_dic, and while doing so
+    # check if the new substring is an anagram or not:
     for right in range(len(p), len(s)):
         left_m1 = right - len(p)
 
         sub_dic[s[right]] += 1
         sub_dic[s[left_m1]] -= 1
 
+        # Cleaning up. If removal of the string caused the counter to
+        # hit zero, we remove that letter from the dictionary:
         if sub_dic[s[left_m1]] == 0:
             sub_dic.pop(s[left_m1])
 
