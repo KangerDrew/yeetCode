@@ -1,3 +1,6 @@
+# The idea is to continue to multiply each value in the array, and update
+# the max value(s) as we iterate through the array:
+
 def maxProductSubarr(nums):
     # Set the maximum to lowest possible value initially:
     finalMax = float('-inf')
