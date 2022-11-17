@@ -1,3 +1,4 @@
+import collections
 # When we calculate the total sum, we need to ensure that we can  create a
 # sub-array that can reach half the total sum. This means that the remaining
 # value(s) will form another sub-array who's sum will be half the total sum!
@@ -55,4 +56,7 @@ def partitionEqualSum(nums):
     return True if target in all_sums else False
 
 
-print(partitionEqualSum([1, 5, 11, 5]))
+# print(partitionEqualSum([1, 5, 11, 5]))
+# test = [0, 1, 2, 3, 4]
+# print(test[0:2] + test[5:-1])
+
