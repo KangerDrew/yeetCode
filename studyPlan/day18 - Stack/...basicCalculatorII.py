@@ -2,7 +2,13 @@
 # operation will yield us.
 
 # Like we learned in elementary school, first step is to complete all the
-# multiplications & divisions. When we're
+# multiplications & divisions. We use stack to keep track of the numbers in the
+# expression, and whenever we see "*" or "/", we pop from the most recent entry
+# of the stack, do "*" or "/" to get new number and move the resulting number
+# back into the stack...
+
+# IMPORTANT: We are given that all the integers in the expressions are non-negative!
+# this means that the first operation we perform will always be addition "+"
 
 
 def calculate(s):
@@ -38,5 +44,4 @@ def calculate(s):
     return res
 
 
-print(calculate("14-3/2"))
-
+print(calculate("-14-3"))
