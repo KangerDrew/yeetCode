@@ -13,17 +13,32 @@
 
 def calculate(s):
 
-    # Setup:
+    # Variable to keep track of "current number":
     current_num = 0
+    # Stack that'll have all the numbers after "*" and "/" is completed:
     stored_stack = []
+    # Variable to keep track of what the operation of current_num is. As
+    # mentioned in <IMPORTANT>, first operation will always be "+":
     operation = "+"
+    # Set DS that has all possible operations we'll be doing in calculator.
+    # This helps clean up the second if statement:
     possible_op = {"+", "-", "*", "/"}
 
+    # Loop through each letter. We also need to check the index position
+    # because we need to check if we've arrived at the end of the s input:
     for i, letter in enumerate(s):
 
+        # If the current letter is a digit, we update the current_num:
         if ord("0") <= ord(letter) <= ord("9"):
             current_num = current_num * 10 + int(letter)
 
+        # If the current letter is not an empty space and is a valid operator
+        # OR we've reached the end of the list, we perform the most recent
+        # operation on the current_num.
+
+        # It's CRUCIAL to not use "elif", because if we've reached the end of
+        # the s input, this statement will be unable to trigger because we'll
+        # exit the for loop after the if statement above triggers!
         if letter != " " and letter in possible_op or i == len(s) - 1:
             if operation == "+":
                 stored_stack.append(current_num)
@@ -36,8 +51,10 @@ def calculate(s):
             operation = letter
             current_num = 0
 
+    # Initialize a variable to return at the end:
     res = 0
 
+    # Add all the numbers in the stack:
     while stored_stack:
         res += stored_stack.pop()
 
