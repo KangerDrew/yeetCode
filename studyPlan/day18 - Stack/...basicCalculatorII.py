@@ -26,7 +26,7 @@ def calculate(s):
             elif operation == "*":
                 stored_stack.append(stored_stack.pop() * current_num)
             elif operation == "/":
-                stored_stack.append(stored_stack.pop() // current_num)
+                stored_stack.append(int(stored_stack.pop() / current_num))
             operation = letter
             current_num = 0
 
@@ -39,3 +39,4 @@ def calculate(s):
 
 
 print(calculate("14-3/2"))
+
