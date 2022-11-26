@@ -23,9 +23,14 @@ def combinationSum(candidates, target):
 
     def dfs(i, cur, total):
 
+        # If we've reached the target, append the COPY of cur combination array
+        # If we don't copy it, that array will mutate as we traverse through
+        # the recursion!:
         if total == target:
             res.append(cur.copy())
             return
+        # If we've exceeded the target, or have no candidates to choose from,
+        # exit out of the recursion stack:
         if i >= cand_count or total > target:
             return
 
