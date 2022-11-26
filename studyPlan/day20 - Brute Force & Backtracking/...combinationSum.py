@@ -16,4 +16,40 @@
 # elements before that index), and continue down THAT path instead.
 
 
+def combinationSum(candidates, target):
 
+    res = []
+    cand_count = len(candidates)
+
+    def dfs(i, cur, total):
+
+        if total == target:
+            res.append(cur.copy())
+            return
+        if i >= cand_count or total > target:
+            return
+
+        # Scenario 1: We want to continue using current candidate in
+        # our combination:
+        # Append the current candidate in our potential combination:
+        cur.append(candidates[i])
+        # Traverse down the decision, after incrementing total:
+        dfs(i, cur, total + candidates[i])
+        # After the above recursion stack is removed, clean up and
+        # remove the candidate that was just added in this current
+        # stack, which should be the last one in the cur array:
+        cur.pop()
+
+        # Scenario 2: We don't want to include the current candidate
+        # any more in our combination. Increment i and continue:
+        dfs(i + 1, cur, total)
+
+        # NOTE: Scenario 1 and 2 can be interchanged!!
+
+    # Execute recursive function from the beginning:
+    dfs(0, [], 0)
+    # Return the obtained result:
+    return res
+
+
+print(combinationSum([2, 3, 6, 7], 7))
