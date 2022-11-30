@@ -39,9 +39,42 @@ import collections
 
 def permutations(nums):
 
-    # Base case - Only 1 number in the nums array, so only 1 possible permutation.
-    # Return that number, as a nums array in an array:
-    if len(nums) == 1:
-        return [[nums[0]]]
+    # Convert the input array so we can use .popleft() operation at O(1) time complexity:
+    new_nums = collections.deque(nums)
 
-    # Otherwise, we need to go into recursive stack to return all possible permutations:
+    def get_perms(arr):
+
+        # Base case - Only 1 number in the nums array, so only 1 possible permutation.
+        # Return that number, as a nums deque in a deque:
+        if len(arr) == 1:
+            return collections.deque([collections.deque([arr[0]])])
+
+        # Otherwise, we need to go into recursive stack to return all possible permutations:
+        res = collections.deque()
+
+        # Loop through all the elements in the deque (arr):
+        for i in range(len(arr)):
+
+            # Remove the current first element:
+            current = arr.popleft()
+
+            # Recursively get all possible permutations using the remaining elements:
+            sub_perms = get_perms(arr)
+
+            # With our newly obtained sub_perms, we loop through and append all the new
+            # permutations that we get by adding the "current" value at the beginning
+
+            for perm in sub_perms:
+                perm.appendleft(current)
+                res.append(perm)
+
+            # We've added all possible permutations that could occur, if we fix the current
+            # value as the first permutation value! Append the current value at the end
+            # of the deque (arr) and repeat the process until we've done the same for all
+            # values in the input:
+            arr.append(current)
+
+        # Return the newly obtained permutations:
+        return res
+
+    return get_perms(new_nums)
