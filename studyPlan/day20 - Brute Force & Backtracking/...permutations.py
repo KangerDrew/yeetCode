@@ -45,9 +45,11 @@ def permutations(nums):
     def get_perms(arr):
 
         # Base case - Only 1 number in the nums array, so only 1 possible permutation.
-        # Return that number, as a nums deque in a deque:
+        # Return that number, as a nums deque in an array. We don't need to encase it in
+        # another deque (everything will eventually be converted to deque) and this looks
+        # cleaner...:
         if len(arr) == 1:
-            return collections.deque([collections.deque([arr[0]])])
+            return [collections.deque([arr[0]])]
 
         # Otherwise, we need to go into recursive stack to return all possible permutations:
         res = collections.deque()
