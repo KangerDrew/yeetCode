@@ -25,10 +25,20 @@ def restore(s):
         if p_count > 3:
             return None
 
+        # Use for loop to iterate 3 letters forward, OR until we reach the end of the string:
         for j in range(i, min(i + 3, s_len)):
+
+            # Check 1 - Is the string we've scanned below the value of 256?
+            # Check 2 - Did we select more than one letters? If we have more than 1 letters,
+            # we need to make sure there are no leading zeros!
             if int(s[i:j+1]) < 256 and (i == j or s[i] != "0"):
+
+                # Recursively call the helper again, this time incrementing i forward by
+                # the current j value, adding onto the current_ip, and incrementing p_count:
                 backtrack(j + 1, current_ip + s[i:j+1] + ".", p_count + 1)
 
+    # Execute backtrack helper:
     backtrack(0, "", 0)
+    # The res list should be populated with all valid IP addresses:
     return res
 
