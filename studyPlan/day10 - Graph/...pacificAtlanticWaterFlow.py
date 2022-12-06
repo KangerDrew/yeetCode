@@ -14,10 +14,10 @@ def waterFlow(heights):
     # Pacific Ocean is top and left, Atlantic Ocean is right and bottom:
     set_pacific, set_atlantic = set(), set()
 
-    # Write a dfs traversal algorithm, that checks which nodes will be able
-    # to reach the current node we've entered. This means, checking neighboring
-    # nodes to see if their height value is greater than or equal to the current
-    # node... Make sure to also pass down the correct set depending on which
+    # Write a dfs traversal algorithm, that checks which positions will be able
+    # to reach the current position we've entered. This means, checking neighboring
+    # positions to see if their height value is greater than or equal to the current
+    # position... Make sure to also pass down the correct set depending on which
     # ocean you begin your traversal from:
     def dfs(position, ocean_set):
 
@@ -36,18 +36,27 @@ def waterFlow(heights):
 
         return None
 
+    # Run dfs() on positions on the top row (pacific ocean)
+    # and positions on the bottom row (atlantic ocean)
     for i in range(col):
         dfs((0, i), set_pacific)
         dfs((row - 1, i), set_atlantic)
 
+    # Run dfs() on positions on the left col (pacific ocean)
+    # and positions on the right col (atlantic ocean)
     for j in range(row):
         dfs((j, 0), set_pacific)
         dfs((j, col - 1), set_atlantic)
 
+    # Initialize array to contain all the positions that occur both in
+    # set_pacific AND set_atlantic:
     res = []
 
+    # Iterate through either of the sets, and check to see if that position
+    # also exists in the other set:
     for node in set_pacific:
         if node in set_atlantic:
+            # Append the position, but convert the tuples to array:
             res.append([node[0], node[1]])
 
     return res
