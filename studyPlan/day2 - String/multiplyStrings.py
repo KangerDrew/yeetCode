@@ -33,7 +33,8 @@ def multiplyStrings(num1, num2):
             res[i1 + i2] = res[i1 + i2] % 10
 
     # Now, we just need to invert the res array back, and remove any extra
-    # 0's at the beginning:
+    # 0's at the beginning. Do this by moving "beg" counter to the first
+    # occurrence of non-zero value in inverted res array:
     res, beg = res[::-1], 0
     while beg < len(res) and res[beg] == 0:
         beg += 1
