@@ -19,12 +19,25 @@ def waterFlow(heights):
     # nodes to see if their height value is greater than or equal to the current
     # node... Make sure to also pass down the correct set depending on which
     # ocean you begin your traversal from:
-    def dfs(node, cur_height, ocean_set):
+    def dfs(position, ocean_set):
 
-        if node in ocean_set:
-            return
+        if position in ocean_set:
+            return None
 
-        ocean_set.add(node)
+        ocean_set.add(position)
+
+        r, c = position[0], position[1]
+        cur_height = heights[r][c]
+        directions = [(r + 1, c), (r - 1, c), (r, c + 1), (r + 1, c - 1)]
+
+        for new_r, new_c in directions:
+            if 0 <= new_r < row and 0 <= new_c < col and cur_height <= heights[new_r][new_c]:
+                dfs((new_r, new_c), ocean_set)
+
+        return None
+
+
+
 
 
 
