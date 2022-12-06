@@ -28,7 +28,7 @@ def waterFlow(heights):
 
         r, c = position[0], position[1]
         cur_height = heights[r][c]
-        directions = [(r + 1, c), (r - 1, c), (r, c + 1), (r + 1, c - 1)]
+        directions = [(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)]
 
         for new_r, new_c in directions:
             if 0 <= new_r < row and 0 <= new_c < col and cur_height <= heights[new_r][new_c]:
@@ -36,8 +36,19 @@ def waterFlow(heights):
 
         return None
 
+    for i in range(col):
+        dfs((0, i), set_pacific)
+        dfs((row - 1, i), set_atlantic)
 
+    for j in range(row):
+        dfs((j, 0), set_pacific)
+        dfs((j, col - 1), set_atlantic)
 
+    res = []
 
+    for node in set_pacific:
+        if node in set_atlantic:
+            res.append([node[0], node[1]])
 
+    return res
 
