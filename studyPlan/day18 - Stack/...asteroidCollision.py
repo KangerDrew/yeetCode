@@ -8,10 +8,14 @@
 
 def asteroidCollision(asteroids):
 
+    # Initialize stack that will contain all remaining asteroids after being processed:
     res = []
 
     for a in asteroids:
 
+        # The only time collision would occur is if asteroid "a" is negative (shooting
+        # towards right, and the most recent asteroid "res[-1]" is positive (shooting
+        # towards left:
         while res and res[-1] > 0 and a < 0:
 
             # First scenario - Incoming asteroid a is bigger than
@@ -26,7 +30,7 @@ def asteroidCollision(asteroids):
             elif res[-1] > abs(a):
                 a = 0
             # Last scenario - The two asteroids are the same size. "a" gets destroyed
-            # along with the asteroid that flew in (res[-1])
+            # along with the asteroid that flew in "res[-1]"
             else:
                 a = 0
                 res.pop()
