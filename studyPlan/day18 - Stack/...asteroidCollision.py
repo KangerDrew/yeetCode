@@ -31,3 +31,10 @@ def asteroidCollision(asteroids):
                 a = 0
                 res.pop()
 
+        # After the while loop above, we can append the "a" asteroid if it was not
+        # destroyed:
+        if a != 0:
+            res.append(a)
+
+    # Return the result:
+    return res
