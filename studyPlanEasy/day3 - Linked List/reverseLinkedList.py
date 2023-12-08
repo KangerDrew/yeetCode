@@ -43,7 +43,7 @@ def reverseItrImproved(head):
         pre = current
         current = post
 
-    return
+    return pre
 
 
 # Recursive solution from memory:
