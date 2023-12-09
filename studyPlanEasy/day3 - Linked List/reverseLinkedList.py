@@ -77,3 +77,30 @@ def reverseRecur(head):
     # Return the head of the reversed list:
     return final
 
+
+# Alternate online approach for recursive solution:
+def reverseRecurAlt(head):
+    # Edge case: If you are given an empty linked list, return none
+    if not head:
+        return None
+
+    # Base case: If you reached the end of the list, that will be the "new head"
+    # of the linked list. Return it!
+    if not head.next:
+        return head
+
+    # If we have yet to reach the end of the list, we will reverse the direction of the
+    # node that goes after this current stack!
+    if head.next:
+        # The recursive function should give us the end (newHead) of the list:
+        newHead = reverseRecurAlt(head.next)
+        # Reverse the direction of the node that comes after this one:
+        head.next.next = head
+
+    # This last line will make it so that when we exit out of the recursive stack,
+    # the final node will be pointing towards None, instead towards the second node
+    # of the original linked list:
+    head.next = None
+
+    # Return the new head:
+    return newHead
