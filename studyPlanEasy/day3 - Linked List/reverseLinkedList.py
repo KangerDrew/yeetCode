@@ -58,7 +58,7 @@ def reverseRecur(head):
             return node
 
         # First, traverse deeper into recursion:
-        new_head = recur(node)
+        new_head = recur(node.next)
 
         # Flip the next node's pointer:
         after = node.next
