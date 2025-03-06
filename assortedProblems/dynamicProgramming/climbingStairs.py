@@ -11,14 +11,20 @@ def climbingStairs(n):
     return table[-1]
 
 
-print(climbingStairs(6))
+def climbingStairsRecursive(stairs, memo=None):
+    if memo is None:
+        memo = {}
 
+    if stairs in memo:
+        return memo[stairs]
 
-def climbingStairsRecursive(n):
-    if n <= 1:
+    if stairs == 2:
+        return 2
+    if stairs == 1:
         return 1
 
-    return climbingStairsRecursive(n - 1) + climbingStairsRecursive(n - 2)
+    if stairs <= 0:
+        return 0
 
-
-print(climbingStairsRecursive(6))
+    memo[stairs] = climbingStairsRecursive(stairs - 1, memo) + climbingStairsRecursive(stairs - 2, memo)
+    return memo[stairs]
